@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splity — A divisão que não estraga a festa</title>
+  <meta name="description" content="Churrasco, restaurante, viagem — o Splity divide as contas do grupo sem discussão e sem planilha. Cada um paga o que consumiu, simples assim." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #4338ca;
+      --brand-dark: #3730a3;
+      --brand-light: #eef2ff;
+      --brand-mid: #e0e7ff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --bg: #ffffff;
+      --bg-gray: #f8fafc;
+      --border: #e2e8f0;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(67,56,202,0.35); }
+      50% { box-shadow: 0 4px 28px rgba(67,56,202,0.55); }
+    }
+    @keyframes gradShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .fade { opacity: 0; transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade.left { transform: translateX(-32px); }
+    .fade.right { transform: translateX(32px); }
+    .fade.up { transform: translateY(24px); }
+    .fade.visible { opacity: 1; transform: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--brand); text-decoration: none; letter-spacing: -0.4px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { text-decoration: none; transition: all 0.15s cubic-bezier(0.4,0,0.2,1); }
+    .nav-enter { font-size: 14px; font-weight: 600; color: var(--text); }
+    .nav-enter:hover { color: var(--brand); }
+    .nav-cta { font-size: 14px; font-weight: 600; color: #fff; background: var(--brand); padding: 10px 20px; border-radius: 99px; }
+    .nav-cta:hover { background: var(--brand-dark); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(67,56,202,0.3); }
+
+    /* ── HERO ── */
+    #hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eef2ff 55%, #e0e7ff 100%);
+      background-size: 180% 180%;
+      animation: gradShift 14s ease infinite;
+      padding: 100px 24px 70px;
+      overflow: hidden;
+    }
+    .hero-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    .hero-text { flex: 1 1 50%; max-width: 460px; min-width: 260px; }
+    .hero-text h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(38px,5vw,58px); font-weight: 700; line-height: 1.08; letter-spacing: -1px; margin-bottom: 22px; }
+    .hero-text h1 em { color: var(--brand); font-style: normal; }
+    .hero-text p { font-size: clamp(16px,1.6vw,19px); color: var(--text-muted); max-width: 480px; margin-bottom: 30px; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--brand); color: #fff; font-size: 16px; font-weight: 600;
+      padding: 15px 30px; border-radius: 99px; text-decoration: none;
+      animation: ctaPulse 3.2s ease-in-out infinite;
+      transition: all 0.15s cubic-bezier(0.4,0,0.2,1);
+    }
+    .hero-cta:hover { background: var(--brand-dark); transform: translateY(-1px); }
+    .hero-note { font-size: 13px; color: var(--text-light); margin-top: 16px; }
+
+    .hero-mockup-col { flex: 1 1 50%; min-width: 280px; display: flex; justify-content: flex-end; padding-right: 64px; box-sizing: border-box; }
+    .phone-outer { width: 289px; height: 629px; flex: none; }
+    .phone-scale { width: 402px; height: 874px; transform: scale(0.7188); transform-origin: top left; filter: drop-shadow(0 30px 60px rgba(15,23,42,0.25)); }
+    .ios-device { width: 402px; height: 874px; border-radius: 48px; background: #000; padding: 12px; box-sizing: border-box; position: relative; }
+    .ios-screen { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; position: relative; background: #f6f6fa; font-family: Inter, sans-serif; color: #191735; }
+    .ios-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 126px; height: 37px; border-radius: 24px; background: #000; z-index: 50; }
+    .ios-status { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; padding: 22px 28px 0; font-size: 17px; font-weight: 600; }
+    .ios-content { position: absolute; top: 0; left: 0; right: 0; bottom: 84px; overflow-y: auto; padding: 76px 20px 20px; box-sizing: border-box; }
+    .ios-step { display: none; }
+    .ios-step.active { display: block; }
+    .ios-tabbar {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 84px;
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(14px);
+      border-top: 1px solid #ececf3; display: flex; align-items: flex-start; justify-content: space-around;
+      padding: 12px 28px 0; box-sizing: border-box;
+    }
+    .ios-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #b6b4c8; }
+    .ios-tab.active { color: var(--brand); }
+    .ios-tab span { font-size: 10.5px; font-weight: 600; }
+
+    .mock-greet-name { font-size: 14px; color: #7a7894; }
+    .mock-greet-user { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.1; }
+    .mock-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(67,56,202,0.25); }
+    .mock-card { background: #fff; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 3px rgba(20,18,50,0.05); transition: outline 0.3s ease; }
+    .mock-tile { width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 23px; flex-shrink: 0; }
+    .mock-card-name { font-size: 15px; font-weight: 600; }
+    .mock-card-sub { font-size: 12.5px; color: #8a88a3; margin-top: 2px; }
+    .mock-fab { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); background: var(--brand-light); color: var(--brand); }
+    .mock-fab.active { background: var(--brand); color: #fff; transform: scale(1.08); box-shadow: 0 6px 16px rgba(67,56,202,0.35); }
+    .mock-friend { background: #fff; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 13px; box-shadow: 0 1px 3px rgba(20,18,50,0.05); }
+    .mock-friend-avatar { width: 42px; height: 42px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+    .mock-check { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; transition: all 0.2s ease; margin-left: auto; }
+    .mock-check.checked { background: currentColor; }
+    .mock-balance-card { background: var(--brand); border-radius: 20px; padding: 16px 18px; margin-top: 18px; color: #fff; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 14px 30px rgba(67,56,202,0.28); }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 24px; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px,3.4vw,40px); font-weight: 700; letter-spacing: -0.6px; text-align: center; margin-bottom: 56px; }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--bg-gray); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 36px; }
+    .step { text-align: center; padding: 0 12px; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 18px; }
+    .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 14.5px; color: var(--text-muted); }
+
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; }
+    .feature-card { border: 1px solid var(--border); border-radius: 18px; padding: 28px; position: relative; transition: all 0.2s ease; }
+    .feature-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,23,42,0.08); }
+    .feature-icon { width: 44px; height: 44px; border-radius: 13px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; font-size: 21px; margin-bottom: 16px; }
+    .feature-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .feature-card p { font-size: 14px; color: var(--text-muted); }
+    .feature-badge { position: absolute; top: 20px; right: 20px; background: var(--brand); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 99px; padding: 4px 10px; }
+
+    /* ── ORIGIN ── */
+    #origin { background: var(--brand); padding: 100px 24px; }
+    .origin-inner { max-width: 820px; margin: 0 auto; text-align: center; color: #fff; }
+    .origin-quote { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px,3vw,32px); font-weight: 600; line-height: 1.35; letter-spacing: -0.4px; }
+    .origin-name { margin-top: 28px; font-size: 15px; font-weight: 600; }
+    .origin-role { font-size: 13px; opacity: 0.75; }
+
+    /* ── PLANS ── */
+    #plans { background: var(--bg-gray); }
+    .plans-grid { max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 24px; align-items: stretch; }
+    .plan-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 34px; display: flex; flex-direction: column; transition: all 0.2s ease; }
+    .plan-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,23,42,0.08); }
+    .plan-card.featured { border: 2px solid var(--brand); background: linear-gradient(160deg, #fff 0%, var(--brand-light) 100%); position: relative; }
+    .plan-card.featured:hover { box-shadow: 0 16px 34px rgba(67,56,202,0.18); }
+    .plan-popular { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 99px; padding: 5px 14px; white-space: nowrap; }
+    .plan-name { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 700; }
+    .plan-card.featured .plan-name { color: var(--brand); }
+    .plan-price { margin: 10px 0 22px; }
+    .plan-price .amount { font-family: 'Space Grotesk', sans-serif; font-size: 38px; font-weight: 700; }
+    .plan-price .period { font-size: 14px; color: var(--text-muted); }
+    .plan-features { display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; flex: 1; }
+    .plan-features div { display: flex; gap: 10px; }
+    .plan-check { color: #10b981; font-weight: 700; }
+    .plan-cross { color: #94a3b8; font-weight: 700; }
+    .plan-btn { display: block; text-align: center; margin-top: 28px; font-size: 15px; font-weight: 600; padding: 13px; border-radius: 99px; text-decoration: none; transition: all 0.15s cubic-bezier(0.4,0,0.2,1); }
+    .plan-btn.secondary { border: 1.5px solid var(--brand); color: var(--brand); }
+    .plan-btn.secondary:hover { background: var(--brand-light); transform: translateY(-1px); }
+    .plan-btn.primary { background: var(--brand); color: #fff; }
+    .plan-btn.primary:hover { background: var(--brand-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(67,56,202,0.35); }
+
+    /* ── FINAL CTA ── */
+    #cta { background: var(--brand); padding: 100px 24px; text-align: center; }
+    .cta-inner { max-width: 680px; margin: 0 auto; color: #fff; }
+    .cta-inner h2 { color: #fff; margin-bottom: 18px; }
+    .cta-inner p { font-size: 16px; opacity: 0.85; margin-bottom: 32px; }
+    .cta-btn { display: inline-block; background: #fff; color: var(--brand); font-size: 16px; font-weight: 700; padding: 15px 34px; border-radius: 99px; text-decoration: none; transition: all 0.15s cubic-bezier(0.4,0,0.2,1); }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(15,23,42,0.25); }
+    .cta-note { font-size: 13px; opacity: 0.7; margin-top: 16px; }
+
+    /* ── FOOTER ── */
+    footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
+    .footer-links { display: flex; gap: 24px; font-size: 13px; }
+    .footer-links a { color: #94a3b8; text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 768px) {
+      section { padding: 64px 20px; }
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-text p { margin-left: auto; margin-right: auto; }
+      .hero-mockup-col { justify-content: center; padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#topo" class="nav-logo">Splity</a>
+    <div class="nav-links">
+      <a href="https://splity.app.br/login" class="nav-enter">Entrar</a>
+      <a href="https://splity.app.br/register" class="nav-cta">Começar grátis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="topo" style="padding-top: 100px;">
+  <div id="hero" style="margin: -90px -24px 0; padding: 100px 24px 70px;">
+    <div class="hero-inner">
+      <div class="hero-text fade up" data-fade>
+        <h1>A divisão que não <em>estraga a festa</em></h1>
+        <p>Viagem, apê, churrasco: registre cada gasto em segundos e o Splity calcula quem paga quem. Sem planilha, sem climão, sem "depois a gente vê".</p>
+        <a href="#planos" class="hero-cta">Experimentar grátis <span style="font-family:'Space Grotesk',sans-serif;">→</span></a>
+        <p class="hero-note">7 dias Premium grátis · Cancele antes e não paga nada</p>
+      </div>
+
+      <div class="hero-mockup-col fade right" data-fade>
+        <div class="phone-outer">
+          <div class="phone-scale">
+            <div class="ios-device">
+              <div class="ios-island"></div>
+              <div class="ios-screen">
+                <div class="ios-status"><span>9:41</span><span>●●●● 🔋</span></div>
+
+                <div class="ios-content">
+                  <!-- passo: início -->
+                  <div class="ios-step active" data-step="inicio">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                      <div><div class="mock-greet-name">Oi,</div><div class="mock-greet-user">Arthur!</div></div>
+                      <div class="mock-avatar">A</div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                      <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;">Seus grupos</div>
+                      <div class="mock-fab" id="fabBtn"><span style="font-size:15px;line-height:1;">+</span> Grupo</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                      <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#fef3c7;">🏠</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Apartamento</div><div class="mock-card-sub">2 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 200,00</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#dcfce7;">💼</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Bolsa da Firma</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
+                    </div>
+                  </div>
+
+                  <!-- passo: criar grupo -->
+                  <div class="ios-step" data-step="criar">
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:30px;">
+                      <div style="width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(20,18,50,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">←</div>
+                      <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;">Novo grupo</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;padding:10px 4px 0;">
+                      <div style="width:84px;height:84px;border-radius:24px;background:#fee2e2;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:28px;">🍖</div>
+                      <div style="font-size:13px;color:#7a7894;margin-bottom:8px;align-self:flex-start;">Nome do grupo</div>
+                      <div style="width:100%;box-sizing:border-box;background:#fff;border-radius:16px;padding:16px 18px;font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;min-height:26px;box-shadow:0 1px 3px rgba(20,18,50,0.05);"><span id="nomeDigitado"></span><span id="cursorPipe" style="opacity:0.55;">|</span></div>
+                    </div>
+                  </div>
+
+                  <!-- passo: amigos -->
+                  <div class="ios-step" data-step="amigos">
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                      <div style="width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(20,18,50,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">←</div>
+                      <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;">Adicionar amigos</div>
+                    </div>
+                    <div style="font-size:13px;color:#7a7894;margin-bottom:14px;">Churrasco</div>
+                    <div id="amigosList" style="display:flex;flex-direction:column;gap:12px;"></div>
+                  </div>
+
+                  <!-- passo: home (grupo criado) -->
+                  <div class="ios-step" data-step="home">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                      <div><div class="mock-greet-name">Oi,</div><div class="mock-greet-user">Arthur!</div></div>
+                      <div class="mock-avatar">A</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                      <div class="mock-card" id="novoGrupoCard"><div class="mock-tile" style="background:#fee2e2;">🍖</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Churrasco</div><div class="mock-card-sub">5 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#8a88a3;">novo</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#fef3c7;">🏠</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Apartamento</div><div class="mock-card-sub">2 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 200,00</div></div>
+                    </div>
+                    <div class="mock-balance-card"><div style="font-size:13px;opacity:0.8;">Saldo total</div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;">+R$ 48,00</div></div>
+                  </div>
+                </div>
+
+                <div class="ios-tabbar">
+                  <div class="ios-tab active"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>Início</span></div>
+                  <div class="ios-tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 9v6M20 12h-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Grupos</span></div>
+                  <div class="ios-tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 4h9l3 3v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 11h8M8 15h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Atividade</span></div>
+                  <div class="ios-tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c0-3.3 3-6 7-6s7 2.7 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Perfil</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <h2 class="fade up" data-fade>Menos de 1 minuto para organizar o grupo</h2>
+    <div class="steps">
+      <div class="step fade up" data-fade><div class="step-num">1</div><h3>Crie o grupo</h3><p>Dê um nome e convide o pessoal por link. Todo mundo entra em segundos, sem cadastro complicado.</p></div>
+      <div class="step fade up" data-fade><div class="step-num">2</div><h3>Registre cada gasto</h3><p>Quem pagou lança na hora: valor, categoria e quem participa. O saldo de cada um atualiza automaticamente.</p></div>
+      <div class="step fade up" data-fade><div class="step-num">3</div><h3>Feche as contas</h3><p>O Splity calcula o menor número de transferências e mostra quem paga quem com chave Pix pronta para copiar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <h2 class="fade up" data-fade>Feito para a vida em grupo</h2>
+    <div class="features-grid">
+      <div class="feature-card fade left" data-fade><div class="feature-icon">➗</div><h3>Divisão inteligente</h3><p>Igual, por porcentagem ou por item, cada despesa do jeito que o grupo combinou.</p></div>
+      <div class="feature-card fade right" data-fade><div class="feature-icon">💸</div><h3>Acerto via Pix</h3><p>No fechamento, a chave Pix de quem recebe aparece pronta para copiar. Quitou, sumiu da lista.</p></div>
+      <div class="feature-card fade left" data-fade><div class="feature-badge">Premium</div><div class="feature-icon">📷</div><h3>Scanner de notas com IA</h3><p>Fotografe a nota fiscal e o Splity lança valor, itens e categoria sozinho.</p></div>
+      <div class="feature-card fade right" data-fade><div class="feature-badge">Premium</div><div class="feature-icon">♾️</div><h3>Grupos ilimitados</h3><p>Viagem, apê, futebol de quinta e o que mais aparecer. Sem limite de grupos ou membros.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section id="origin">
+  <div class="origin-inner fade up" data-fade>
+    <div class="origin-quote">"O Splity nasceu numa viagem em que ninguém lembrava quem tinha pago o quê. A amizade sobreviveu, mas por pouco. Nunca mais."</div>
+    <div class="origin-name">Arthur Fontenelle</div>
+    <div class="origin-role">Criador do Splity</div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans">
+  <div class="container">
+    <h2 class="fade up" data-fade>Comece grátis. Evolua quando o grupo crescer.</h2>
+    <div class="plans-grid">
+      <div class="plan-card fade left" data-fade>
+        <div class="plan-name">Free</div>
+        <div class="plan-price"><span class="amount">R$ 0</span><span class="period"> /para sempre</span></div>
+        <div class="plan-features">
+          <div><span class="plan-check">✓</span> Até 3 grupos ativos</div>
+          <div><span class="plan-check">✓</span> Até 4 membros por grupo</div>
+          <div><span class="plan-check">✓</span> Divisão igual e acerto via Pix</div>
+          <div style="color:#94a3b8;"><span class="plan-cross">✕</span> Scanner de notas com IA</div>
+          <div style="color:#94a3b8;"><span class="plan-cross">✕</span> Grupos e membros ilimitados</div>
+        </div>
+        <a href="https://splity.app.br/register" class="plan-btn secondary">Criar conta grátis</a>
+      </div>
+      <div class="plan-card featured fade right" data-fade>
+        <div class="plan-popular">Mais popular</div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-price"><span class="amount">R$ 9,90</span><span class="period"> /mês</span></div>
+        <div class="plan-features">
+          <div><span class="plan-check">✓</span> Grupos e membros ilimitados</div>
+          <div><span class="plan-check">✓</span> Scanner de notas com IA</div>
+          <div><span class="plan-check">✓</span> Divisão por porcentagem e por item</div>
+          <div><span class="plan-check">✓</span> Lembretes automáticos de cobrança</div>
+          <div><span class="plan-check">✓</span> Extrato PDF do grupo</div>
+        </div>
+        <a href="https://splity.app.br/register" class="plan-btn primary">Testar 7 dias grátis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="cta-inner fade up" data-fade>
+    <h2>Na próxima vez, você já tem o Splity no celular.</h2>
+    <p>Crie o grupo antes do primeiro gasto e ninguém precisa cobrar ninguém depois.</p>
+    <a href="https://splity.app.br/register" class="cta-btn">Criar conta grátis</a>
+    <div class="cta-note">Grátis para sempre no plano Free · Premium por R$ 9,90/mês</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Splity</div>
+    <div class="footer-links">
+      <a href="https://splity.app.br/terms">Termos de Uso</a>
+      <a href="https://splity.app.br/privacy">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  document.querySelectorAll('[data-fade]').forEach((el) => {
+    el.style.transitionDelay = '0s';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-fade]').forEach((el) => observer.observe(el));
+
+  // Demo animado do mockup do app
+  const AMIGOS = [
+    { nome: 'Maria Fernanda', iniciais: 'MF', cor: '#10b981' },
+    { nome: 'Fabianne', iniciais: 'F', cor: '#f59e0b' },
+    { nome: 'Isis', iniciais: 'I', cor: '#ec4899' },
+    { nome: 'Arthur', iniciais: 'A', cor: '#4338ca' },
+    { nome: 'Alexandre', iniciais: 'AL', cor: '#8b5cf6' },
+  ];
+  const steps = document.querySelectorAll('.ios-step');
+  const amigosList = document.getElementById('amigosList');
+  const nomeDigitadoEl = document.getElementById('nomeDigitado');
+  const cursorEl = document.getElementById('cursorPipe');
+  const fabBtn = document.getElementById('fabBtn');
+  const novoGrupoCard = document.getElementById('novoGrupoCard');
+
+  amigosList.innerHTML = AMIGOS.map((a, i) => `
+    <div class="mock-friend">
+      <div class="mock-friend-avatar" style="background:${a.cor};">${a.iniciais}</div>
+      <div style="flex:1;font-size:15.5px;font-weight:600;">${a.nome}</div>
+      <div class="mock-check" data-i="${i}" style="border-color:#cbd5e1;color:${a.cor};">✓</div>
+    </div>
+  `).join('');
+  const checkEls = amigosList.querySelectorAll('.mock-check');
+
+  function showStep(name) {
+    steps.forEach((s) => s.classList.toggle('active', s.dataset.step === name));
+  }
+
+  let cursorOn = true;
+  setInterval(() => { cursorOn = !cursorOn; cursorEl.style.display = cursorOn ? 'inline' : 'none'; }, 480);
+
+  const timers = [];
+  const t = (fn, ms) => timers.push(setTimeout(fn, ms));
+
+  function runDemo() {
+    timers.forEach(clearTimeout);
+    timers.length = 0;
+    checkEls.forEach((el) => { el.classList.remove('checked'); el.style.borderColor = '#cbd5e1'; });
+    fabBtn.classList.remove('active');
+    novoGrupoCard.style.outline = 'none';
+    nomeDigitadoEl.textContent = '';
+    showStep('inicio');
+
+    t(() => fabBtn.classList.add('active'), 900);
+    const tDepoisFab = 900 + 450;
+
+    t(() => showStep('criar'), tDepoisFab);
+    const nomeAlvo = 'Churrasco';
+    for (let i = 1; i <= nomeAlvo.length; i++) {
+      t(() => { nomeDigitadoEl.textContent = nomeAlvo.slice(0, i); }, tDepoisFab + 400 + i * 110);
+    }
+    const tDepoisDigitar = tDepoisFab + 400 + nomeAlvo.length * 110 + 700;
+
+    t(() => showStep('amigos'), tDepoisDigitar);
+    checkEls.forEach((el, i) => {
+      t(() => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; }, tDepoisDigitar + 500 + i * 550);
+    });
+    const tDepoisAmigos = tDepoisDigitar + 500 + AMIGOS.length * 550 + 700;
+
+    t(() => { showStep('home'); novoGrupoCard.style.outline = '2px solid #4338ca'; novoGrupoCard.style.outlineOffset = '2px'; }, tDepoisAmigos);
+    t(() => { novoGrupoCard.style.outline = 'none'; }, tDepoisAmigos + 1400);
+
+    const tFimCiclo = tDepoisAmigos + 2600;
+    t(runDemo, tFimCiclo);
+  }
+  runDemo();
+
+  // Parallax sutil no mockup do hero
+  const mock = document.querySelector('.hero-mockup-col');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (mock && y < 900) mock.style.transform = `translateY(${y * 0.14}px)`;
+      ticking = false;
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
