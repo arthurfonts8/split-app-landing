@@ -155,6 +155,16 @@
 
     /* ── PLANS ── */
     #plans { background: var(--bg-gray); }
+    .billing-toggle-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 24px 0 36px; }
+    .billing-toggle { display: flex; align-items: center; gap: 12px; }
+    .billing-toggle-label { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
+    .billing-toggle-label.active { color: var(--text); }
+    .billing-toggle-track { position: relative; width: 48px; height: 26px; background: var(--border); border-radius: 999px; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+    .billing-toggle-track.annual { background: var(--brand); }
+    .billing-toggle-thumb { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+    .billing-toggle-track.annual .billing-toggle-thumb { transform: translateX(22px); }
+    .savings-badge { background: #dcfce7; color: #16a34a; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+    .billing-note { font-size: 12.5px; color: var(--text-muted); }
     .plans-grid { max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 24px; align-items: stretch; }
     .plan-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 34px; display: flex; flex-direction: column; transition: all 0.2s ease; }
     .plan-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,23,42,0.08); }
@@ -350,6 +360,18 @@
 <section id="plans">
   <div class="container">
     <h2 class="fade up" data-fade>Comece grátis. Evolua quando o grupo crescer.</h2>
+
+    <div class="billing-toggle-wrap">
+      <div class="billing-toggle">
+        <span class="billing-toggle-label active" id="label-mensal">Mensal</span>
+        <div class="billing-toggle-track" id="billing-track" onclick="toggleBilling()">
+          <div class="billing-toggle-thumb"></div>
+        </div>
+        <span class="billing-toggle-label" id="label-anual">Anual <span class="savings-badge">-16%</span></span>
+      </div>
+      <span class="billing-note" id="billing-note">Cobrança mensal recorrente via cartão</span>
+    </div>
+
     <div class="plans-grid">
       <div class="plan-card fade left" data-fade>
         <div class="plan-name">Free</div>
@@ -367,7 +389,8 @@
       <div class="plan-card featured fade right" data-fade>
         <div class="plan-popular">Mais popular</div>
         <div class="plan-name">Premium</div>
-        <div class="plan-price"><span class="amount">R$ 9,90</span><span class="period"> /mês</span></div>
+        <div class="plan-price"><span class="amount" id="premium-amount">R$ 9,90</span><span class="period" id="premium-period"> /mês</span></div>
+        <div class="billing-note" id="premium-equiv" style="margin:-14px 0 8px;"></div>
         <div class="plan-features">
           <div><span class="plan-check">✓</span> Despesas ilimitadas por dia</div>
           <div><span class="plan-check">✓</span> Scanner de notas com IA</div>
@@ -402,6 +425,22 @@
 </footer>
 
 <script>
+  // Toggle mensal/anual do card Premium (so exibicao - cobranca anual
+  // ainda nao esta ativa no checkout, ver billing-note)
+  let isAnnual = false;
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    document.getElementById('billing-track').classList.toggle('annual', isAnnual);
+    document.getElementById('label-mensal').classList.toggle('active', !isAnnual);
+    document.getElementById('label-anual').classList.toggle('active', isAnnual);
+    document.getElementById('premium-amount').textContent = isAnnual ? 'R$ 99,90' : 'R$ 9,90';
+    document.getElementById('premium-period').textContent = isAnnual ? ' /ano' : ' /mês';
+    document.getElementById('premium-equiv').textContent = isAnnual ? 'equivale a R$ 8,33/mês' : '';
+    document.getElementById('billing-note').textContent = isAnnual
+      ? 'Pagamento anual à vista via Pix ou cartão — em breve'
+      : 'Cobrança mensal recorrente via cartão';
+  }
+
   // Fade-in on scroll
   document.querySelectorAll('[data-fade]').forEach((el) => {
     el.style.transitionDelay = '0s';
