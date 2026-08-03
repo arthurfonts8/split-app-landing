@@ -124,6 +124,23 @@
     .mock-check.checked svg { opacity: 1; }
     .mock-balance-card { background: var(--brand); border-radius: 20px; padding: 16px 18px; margin-top: 18px; color: #fff; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 14px 30px rgba(67,56,202,0.28); }
 
+    /* Card de saldo em gradiente, igual ao card real do app (GroupsPage) */
+    .mock-hero-balance { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); border-radius: 20px; padding: 18px 20px; margin-bottom: 18px; box-shadow: 0 14px 30px rgba(79,70,229,0.28); color: #fff; }
+    .mock-hero-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .mock-hero-label { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; }
+    .mock-currency-pill { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.18); border-radius: 999px; padding: 3px 9px 3px 10px; font-size: 10.5px; font-weight: 600; }
+    .mock-hero-total { font-family: 'Space Grotesk', sans-serif; font-size: 27px; font-weight: 800; letter-spacing: -0.5px; }
+    .mock-hero-subs { display: flex; gap: 8px; margin-top: 14px; }
+    .mock-hero-sub { flex: 1; background: rgba(255,255,255,0.14); border-radius: 12px; padding: 8px 10px; }
+    .mock-hero-sub-label { font-size: 10px; color: rgba(255,255,255,0.75); margin-bottom: 2px; }
+    .mock-hero-sub-val { font-size: 13.5px; font-weight: 700; }
+
+    .mock-section-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .mock-section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #9b99b3; text-transform: uppercase; }
+    .mock-see-all { font-size: 12.5px; font-weight: 600; color: var(--brand); }
+    .mock-bell { width: 38px; height: 38px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(20,18,50,0.08); display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+    .mock-bell-dot { position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 50%; background: #ef4444; border: 1.5px solid #fff; }
+
     /* ── SECTIONS ── */
     section { padding: 90px 24px; }
     .container { max-width: 1120px; margin: 0 auto; }
@@ -252,18 +269,38 @@
                 <div class="ios-content">
                   <!-- passo: início -->
                   <div class="ios-step active" data-step="inicio">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-                      <div><div class="mock-greet-name">Oi,</div><div class="mock-greet-user">Arthur!</div></div>
-                      <div class="mock-avatar">A</div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+                      <div><div class="mock-greet-name">Olá,</div><div class="mock-greet-user">Arthur!</div></div>
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div class="mock-bell"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7a7894" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><div class="mock-bell-dot"></div></div>
+                        <div class="mock-avatar">A</div>
+                      </div>
                     </div>
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-                      <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;">Seus grupos</div>
-                      <div class="mock-fab" id="fabBtn"><span style="font-size:15px;line-height:1;">+</span> Grupo</div>
+
+                    <div class="mock-hero-balance">
+                      <div class="mock-hero-top">
+                        <span class="mock-hero-label">Saldo total</span>
+                        <span class="mock-currency-pill">em Real <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                      </div>
+                      <div class="mock-hero-total">−R$ 130,00</div>
+                      <div class="mock-hero-subs">
+                        <div class="mock-hero-sub"><div class="mock-hero-sub-label">te devem</div><div class="mock-hero-sub-val">R$ 70,00</div></div>
+                        <div class="mock-hero-sub"><div class="mock-hero-sub-label">você deve</div><div class="mock-hero-sub-val">R$ 200,00</div></div>
+                      </div>
+                    </div>
+
+                    <div class="mock-section-row">
+                      <span class="mock-section-label">Meus grupos</span>
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <span class="mock-see-all">Ver todos →</span>
+                        <div class="mock-fab" id="fabBtn" style="width:30px;height:30px;padding:0;border-radius:50%;justify-content:center;"><span style="font-size:16px;line-height:1;">+</span></div>
+                      </div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
                       <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#fef3c7;">🏠</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Apartamento</div><div class="mock-card-sub">2 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 200,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#dcfce7;">💼</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Bolsa da Firma</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafe</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 22,00</div></div>
                     </div>
                   </div>
 
@@ -292,16 +329,35 @@
 
                   <!-- passo: home (grupo criado) -->
                   <div class="ios-step" data-step="home">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-                      <div><div class="mock-greet-name">Oi,</div><div class="mock-greet-user">Arthur!</div></div>
-                      <div class="mock-avatar">A</div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+                      <div><div class="mock-greet-name">Olá,</div><div class="mock-greet-user">Arthur!</div></div>
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div class="mock-bell"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7a7894" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><div class="mock-bell-dot"></div></div>
+                        <div class="mock-avatar">A</div>
+                      </div>
+                    </div>
+
+                    <div class="mock-hero-balance">
+                      <div class="mock-hero-top">
+                        <span class="mock-hero-label">Saldo total</span>
+                        <span class="mock-currency-pill">em Real <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                      </div>
+                      <div class="mock-hero-total">+R$ 48,00</div>
+                      <div class="mock-hero-subs">
+                        <div class="mock-hero-sub"><div class="mock-hero-sub-label">te devem</div><div class="mock-hero-sub-val">R$ 48,00</div></div>
+                        <div class="mock-hero-sub"><div class="mock-hero-sub-label">você deve</div><div class="mock-hero-sub-val">R$ 0,00</div></div>
+                      </div>
+                    </div>
+
+                    <div class="mock-section-row">
+                      <span class="mock-section-label">Meus grupos</span>
+                      <span class="mock-see-all">Ver todos →</span>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
                       <div class="mock-card" id="novoGrupoCard"><div class="mock-tile" style="background:#fee2e2;">🍖</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Churrasco</div><div class="mock-card-sub">5 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#8a88a3;">novo</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#fef3c7;">🏠</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Apartamento</div><div class="mock-card-sub">2 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 200,00</div></div>
                     </div>
-                    <div class="mock-balance-card"><div style="font-size:13px;opacity:0.8;">Saldo total</div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;">+R$ 48,00</div></div>
                   </div>
                 </div>
 
