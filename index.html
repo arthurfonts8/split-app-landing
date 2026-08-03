@@ -557,10 +557,10 @@
     nomeDigitadoEl.textContent = '';
     showStep('inicio');
 
-    const tDepoisInicio = 1300;
+    const tDepoisInicio = 2800;
     t(() => showStep('grupos'), tDepoisInicio);
-    t(() => fabBtn.classList.add('active'), tDepoisInicio + 700);
-    const tDepoisFab = tDepoisInicio + 700 + 450;
+    t(() => fabBtn.classList.add('active'), tDepoisInicio + 1700);
+    const tDepoisFab = tDepoisInicio + 1700 + 700;
 
     t(() => showStep('criar'), tDepoisFab);
     const nomeAlvo = 'Churrasco';
@@ -571,9 +571,9 @@
 
     t(() => showStep('amigos'), tDepoisDigitar);
     checkEls.forEach((el, i) => {
-      t(() => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; }, tDepoisDigitar + 500 + i * 550);
+      t(() => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; }, tDepoisDigitar + 500 + i * 650);
     });
-    const tDepoisAmigos = tDepoisDigitar + 500 + AMIGOS.length * 550 + 700;
+    const tDepoisAmigos = tDepoisDigitar + 500 + AMIGOS.length * 650 + 700;
 
     t(() => { showStep('grupos-home'); novoGrupoCard.style.outline = '2px solid #4338ca'; novoGrupoCard.style.outlineOffset = '2px'; }, tDepoisAmigos);
     t(() => { novoGrupoCard.style.outline = 'none'; }, tDepoisAmigos + 1400);
