@@ -551,13 +551,35 @@
     tabGrupos.classList.toggle('active', tab === 'grupos');
   }
 
+  const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
   let cursorOn = true;
-  setInterval(() => { cursorOn = !cursorOn; cursorEl.style.display = cursorOn ? 'inline' : 'none'; }, 480);
+  if (!prefersReducedMotion) {
+    setInterval(() => { cursorOn = !cursorOn; cursorEl.style.display = cursorOn ? 'inline' : 'none'; }, 480);
+  }
 
   const timers = [];
   const t = (fn, ms) => timers.push(setTimeout(fn, ms));
 
+  // Roda no máximo duas vezes e para no estado final (não fica repetindo
+  // pra sempre sem controle) - e não começa um novo ciclo enquanto o
+  // mouse estiver em cima do mockup, pra não distrair quem tá lendo.
+  let cycleCount = 0;
+  const MAX_CYCLES = 2;
+  let hovering = false;
+  let waitingToRestart = false;
+  const phoneEl = document.querySelector('.ios-device');
+  if (phoneEl) {
+    phoneEl.addEventListener('mouseenter', () => { hovering = true; });
+    phoneEl.addEventListener('mouseleave', () => {
+      hovering = false;
+      if (waitingToRestart) { waitingToRestart = false; runDemo(); }
+    });
+  }
+
   function runDemo() {
+    if (hovering) { waitingToRestart = true; return; }
+    cycleCount++;
     timers.forEach(clearTimeout);
     timers.length = 0;
     checkEls.forEach((el) => { el.classList.remove('checked'); el.style.borderColor = '#cbd5e1'; el.style.background = 'transparent'; });
@@ -578,19 +600,33 @@
     }
     const tDepoisDigitar = tDepoisFab + 400 + nomeAlvo.length * 110 + 700;
 
+    // Intervalo entre cada amigo marcado: era 650ms (6 amigos = 3.250ms só
+    // nessa etapa), bem acima do teto de 500ms de stagger total recomendado
+    // pra um grupo de elementos revelados em sequência. 90ms mantém dá pra
+    // acompanhar visualmente e fica dentro do teto (5 intervalos = 450ms).
     t(() => showStep('amigos'), tDepoisDigitar);
     checkEls.forEach((el, i) => {
-      t(() => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; }, tDepoisDigitar + 500 + i * 650);
+      t(() => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; }, tDepoisDigitar + 500 + i * 90);
     });
-    const tDepoisAmigos = tDepoisDigitar + 500 + AMIGOS.length * 650 + 700;
+    const tDepoisAmigos = tDepoisDigitar + 500 + AMIGOS.length * 90 + 700;
 
     t(() => { showStep('grupos-home'); novoGrupoCard.style.outline = '2px solid #4338ca'; novoGrupoCard.style.outlineOffset = '2px'; }, tDepoisAmigos);
     t(() => { novoGrupoCard.style.outline = 'none'; }, tDepoisAmigos + 1400);
 
-    const tFimCiclo = tDepoisAmigos + 2600;
-    t(runDemo, tFimCiclo);
+    if (cycleCount < MAX_CYCLES) {
+      const tFimCiclo = tDepoisAmigos + 2600;
+      t(runDemo, tFimCiclo);
+    }
   }
-  runDemo();
+
+  if (prefersReducedMotion) {
+    // Pula direto pro resultado final, sem digitar/marcar um por um.
+    nomeDigitadoEl.textContent = 'Churrasco';
+    checkEls.forEach((el, i) => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; });
+    showStep('grupos-home');
+  } else {
+    runDemo();
+  }
 
   // Parallax sutil no mockup do hero
   const mock = document.querySelector('.hero-mockup-col');
