@@ -49,6 +49,15 @@
     .fade.up { transform: translateY(24px); }
     .fade.visible { opacity: 1; transform: none; }
 
+    /* Quem pede menos movimento no sistema ainda vê os elementos aparecerem
+       (opacidade), só sem o deslocamento e sem os loops que rodam pra
+       sempre (pulso do CTA, gradiente do hero). */
+    @media (prefers-reduced-motion: reduce) {
+      #hero { animation: none; }
+      .hero-cta { animation: none; }
+      .fade.left, .fade.right, .fade.up { transform: none; }
+    }
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -82,7 +91,7 @@
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--brand); color: #fff; font-size: 16px; font-weight: 600;
       padding: 15px 30px; border-radius: 99px; text-decoration: none;
-      animation: ctaPulse 3.2s ease-in-out infinite;
+      animation: ctaPulse 3.2s ease-in-out 3;
       transition: all 0.15s cubic-bezier(0.4,0,0.2,1);
     }
     .hero-cta:hover { background: var(--brand-dark); transform: translateY(-1px); }
