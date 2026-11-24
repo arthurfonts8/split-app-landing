@@ -86,7 +86,7 @@
     .hero-text { flex: 1 1 50%; max-width: 460px; min-width: 260px; }
     .hero-text h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(38px,5vw,58px); font-weight: 700; line-height: 1.08; letter-spacing: -1px; margin-bottom: 22px; }
     .hero-text h1 em { color: var(--brand); font-style: normal; }
-    .hero-text p { font-size: clamp(16px,1.6vw,19px); color: var(--text-muted); max-width: 480px; margin-bottom: 30px; }
+    .hero-text p { font-size: clamp(16px,1.6vw,19px); color: var(--text-muted); max-width: 480px; margin-bottom: 24px; }
     .hero-cta {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--brand); color: #fff; font-size: 16px; font-weight: 600;
@@ -96,6 +96,8 @@
     }
     .hero-cta:hover { background: var(--brand-dark); transform: translateY(-1px); }
     .hero-note { font-size: 13px; color: var(--text-light); margin-top: 16px; }
+    .hero-app { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none; border-bottom: 1.5px solid rgba(67,56,202,0.3); padding-bottom: 1px; }
+    .hero-app:hover { border-bottom-color: var(--brand); }
 
     .hero-mockup-col { flex: 1 1 50%; min-width: 280px; display: flex; justify-content: flex-end; padding-right: 64px; box-sizing: border-box; }
     .phone-outer { width: 289px; height: 629px; flex: none; }
@@ -167,7 +169,8 @@
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; }
     .feature-card { border: 1px solid var(--border); border-radius: 18px; padding: 28px; position: relative; transition: all 0.2s ease; }
     .feature-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,23,42,0.08); }
-    .feature-icon { width: 44px; height: 44px; border-radius: 13px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; font-size: 21px; margin-bottom: 16px; }
+    .feature-icon { width: 44px; height: 44px; border-radius: 13px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .feature-icon svg, .trust-item svg { width: 22px; height: 22px; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .feature-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
     .feature-card p { font-size: 14px; color: var(--text-muted); }
     .feature-badge { position: absolute; top: 20px; right: 20px; background: var(--brand); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 99px; padding: 4px 10px; }
@@ -178,6 +181,16 @@
     .origin-quote { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px,3vw,32px); font-weight: 600; line-height: 1.35; letter-spacing: -0.4px; }
     .origin-name { margin-top: 28px; font-size: 15px; font-weight: 600; }
     .origin-role { font-size: 13px; opacity: 0.75; }
+
+
+    .origin-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 99px; background: rgba(255,255,255,0.16); margin-bottom: 26px; }
+    .origin-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin: 0 0 34px; }
+    .origin-stat { background: rgba(255,255,255,0.12); border-radius: 18px; padding: 14px 22px; min-width: 150px; }
+    .origin-stat b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.6px; }
+    .origin-stat span { font-size: 13px; opacity: 0.75; }
+    .origin-person { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 30px; text-align: left; }
+    .origin-avatar { width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 19px; }
+    .origin-person .origin-name { margin-top: 0; }
 
     /* ── PLANS ── */
     #plans { background: var(--bg-gray); }
@@ -212,6 +225,75 @@
     .plan-btn.primary { background: var(--brand); color: #fff; }
     .plan-btn.primary:hover { background: var(--brand-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(67,56,202,0.35); }
 
+
+    /* ── CALCULADORA DO HERO ── */
+    .calc { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 18px 18px 16px; margin-bottom: 26px; box-shadow: 0 10px 30px rgba(67,56,202,0.10); max-width: 440px; }
+    .calc-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand); margin-bottom: 12px; }
+    .calc-row { display: flex; gap: 12px; align-items: flex-end; }
+    .calc-field { display: flex; flex-direction: column; gap: 6px; }
+    .calc-field.grow { flex: 1 1 auto; min-width: 0; }
+    .calc-label { font-size: 12.5px; font-weight: 600; color: var(--text-muted); }
+    .calc-money { display: flex; align-items: center; gap: 8px; background: var(--bg-gray); border: 1.5px solid var(--border); border-radius: 14px; padding: 0 14px; height: 50px; transition: border-color 0.15s, box-shadow 0.15s; }
+    .calc-money:focus-within { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(67,56,202,0.12); }
+    .calc-money span { font-weight: 700; color: var(--text-muted); }
+    .calc-money input { border: 0; outline: 0; background: transparent; width: 100%; min-width: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); }
+    .calc-step { display: flex; align-items: center; background: var(--bg-gray); border: 1.5px solid var(--border); border-radius: 14px; height: 50px; }
+    .calc-step button { width: 40px; height: 100%; border: 0; background: transparent; font-size: 22px; font-weight: 600; color: var(--brand); cursor: pointer; border-radius: 12px; }
+    .calc-step button:hover { background: var(--brand-light); }
+    .calc-step output { min-width: 28px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; }
+    .calc-result { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .calc-result-label { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .calc-result-value { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.8px; color: var(--brand); }
+    .calc-hint { font-size: 12.5px; color: var(--text-light); margin-top: 6px; }
+
+    /* ── SITUAÇÕES ── */
+    #situations { padding: 90px 0 0; }
+    #situations > .container { padding: 0 24px; }
+    #situations h2 { margin-bottom: 14px; }
+    .sit-lead { text-align: center; color: var(--text-muted); font-size: 17px; max-width: 560px; margin: 0 auto 56px; }
+    .sit { padding: 84px 24px; }
+    .sit-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .sit.flip .sit-copy { order: 2; }
+    .sit-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; margin-bottom: 18px; background: rgba(15,23,42,0.08); }
+    .sit h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px,4.4vw,54px); font-weight: 700; line-height: 1.05; letter-spacing: -1.2px; margin-bottom: 18px; }
+    .sit p { font-size: 17px; line-height: 1.55; max-width: 440px; opacity: 0.82; }
+    .sit-viagem { background: var(--brand); color: #fff; }
+    .sit-viagem .sit-tag { background: rgba(255,255,255,0.16); }
+    .sit-ape { background: #d1fae5; color: #064e3b; }
+    .sit-churrasco { background: #ffedd5; color: #7c2d12; }
+    .sit-casal { background: #fce7f3; color: #831843; }
+
+    .sit-card { background: #fff; color: var(--text); border-radius: 26px; padding: 22px; max-width: 420px; width: 100%; justify-self: center; box-shadow: 0 28px 60px rgba(15,23,42,0.22); }
+    .sit-card-head { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid #eef0f6; margin-bottom: 8px; }
+    .sit-row { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; font-size: 14.5px; border-bottom: 1px solid #f3f4f8; }
+    .sit-row small { display: block; color: #8a88a3; font-size: 12px; margin-top: 1px; }
+    .sit-row b { font-family: 'Space Grotesk', sans-serif; font-weight: 700; white-space: nowrap; }
+    .sit-sum { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0 6px; font-size: 14px; color: #6b6a85; }
+    .sit-sum b { font-family: 'Space Grotesk', sans-serif; font-size: 22px; color: var(--text); letter-spacing: -0.4px; }
+    .sit-pay { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--brand-light); border-radius: 16px; padding: 12px 14px; font-size: 13.5px; font-weight: 600; color: var(--brand-dark); }
+    .sit-pay span { background: var(--brand); color: #fff; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+
+    /* ── FAIXA DE CONFIANÇA ── */
+    .trust { background: #fff; border-bottom: 1px solid var(--border); padding: 26px 24px; }
+    .trust-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 18px 28px; }
+    .trust-item { display: flex; align-items: center; gap: 12px; font-size: 14.5px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .trust-item .ti { width: 40px; height: 40px; border-radius: 12px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .trust-item small { display: block; font-size: 12.5px; font-weight: 500; color: var(--text-muted); }
+
+
+    /* ── FAQ ── */
+    #faq { background: #fff; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 16px; background: #fff; transition: border-color 0.15s, box-shadow 0.15s; }
+    .faq-item[open] { border-color: var(--brand); box-shadow: 0 8px 22px rgba(67,56,202,0.08); }
+    .faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; font-size: 24px; font-weight: 500; color: var(--brand); line-height: 1; transition: transform 0.2s; flex-shrink: 0; }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item summary:focus-visible { outline: 3px solid rgba(67,56,202,0.35); outline-offset: 2px; border-radius: 16px; }
+    .faq-item p { padding: 0 22px 20px; font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+
     /* ── FINAL CTA ── */
     #cta { background: var(--brand); padding: 100px 24px; text-align: center; }
     .cta-inner { max-width: 680px; margin: 0 auto; color: #fff; }
@@ -234,6 +316,10 @@
       .hero-inner { flex-direction: column; text-align: center; }
       .hero-text p { margin-left: auto; margin-right: auto; }
       .hero-mockup-col { justify-content: center; padding-right: 0; }
+      .calc { margin-left: auto; margin-right: auto; text-align: left; }
+      .sit { padding: 60px 20px; }
+      .sit-inner { grid-template-columns: 1fr; gap: 36px; }
+      .sit.flip .sit-copy { order: 0; }
     }
   </style>
 </head>
@@ -256,8 +342,31 @@
       <div class="hero-text fade up" data-fade>
         <h1>A divisão que não <em>estraga a festa</em></h1>
         <p>Viagem, apê, churrasco: registre cada gasto em segundos e o Splity calcula quem paga quem. Sem planilha, sem climão, sem "depois a gente vê".</p>
-        <a href="#planos" class="hero-cta">Experimentar grátis <span style="font-family:'Space Grotesk',sans-serif;">→</span></a>
+        <div class="calc" id="calc">
+          <div class="calc-title">Faça a conta agora</div>
+          <div class="calc-row">
+            <label class="calc-field grow">
+              <span class="calc-label">Quanto deu a conta?</span>
+              <span class="calc-money"><span>R$</span><input id="calcTotal" type="text" inputmode="decimal" value="240" autocomplete="off" aria-describedby="calcHint" /></span>
+            </label>
+            <div class="calc-field">
+              <span class="calc-label" id="calcPplLabel">Pessoas</span>
+              <div class="calc-step" role="group" aria-labelledby="calcPplLabel">
+                <button type="button" id="calcMinus" aria-label="Menos uma pessoa">−</button>
+                <output id="calcPeople" aria-live="polite">4</output>
+                <button type="button" id="calcPlus" aria-label="Mais uma pessoa">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="calc-result" aria-live="polite">
+            <span class="calc-result-label">Cada um paga</span>
+            <span class="calc-result-value" id="calcResult">R$ 60,00</span>
+          </div>
+          <div class="calc-hint" id="calcHint">No Splity, quem deve já vê o Pix pronto pra copiar.</div>
+        </div>
+        <a href="#plans" class="hero-cta">Experimentar grátis <span style="font-family:'Space Grotesk',sans-serif;">→</span></a>
         <p class="hero-note">7 dias Premium grátis · Cancele antes e não paga nada</p>
+        <a class="hero-app" href="https://testflight.apple.com/join/ZAApR7mg" target="_blank" rel="noopener">Baixar o app para iPhone (beta) →</a>
       </div>
 
       <div class="hero-mockup-col fade right" data-fade>
@@ -303,7 +412,7 @@
                       <span class="mock-see-all">Ver todos →</span>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
-                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafe</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 70,00</div></div>
                     </div>
@@ -319,7 +428,7 @@
                       </div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
-                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafe</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 70,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#dbeafe;">🍽️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Almoço Domingo</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
@@ -360,7 +469,7 @@
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
                       <div class="mock-card" id="novoGrupoCard"><div class="mock-tile" style="background:#fee2e2;">🍖</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Churrasco</div><div class="mock-card-sub">5 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#8a88a3;">novo</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafe</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
+                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 70,00</div></div>
                       <div class="mock-card"><div class="mock-tile" style="background:#dbeafe;">🍽️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Almoço Domingo</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
@@ -383,14 +492,92 @@
   </div>
 </section>
 
+<!-- CONFIANÇA -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8H4v-8"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span><span>Grátis para sempre<small>no plano Free</small></span></div>
+    <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg></span><span>Acerto via Pix<small>chave pronta pra copiar</small></span></div>
+    <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><span>Seus dados protegidos<small>conforme a LGPD</small></span></div>
+    <div class="trust-item"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span><span>Sem anúncios no Premium<small>cancele quando quiser</small></span></div>
+  </div>
+</div>
+
 <!-- HOW IT WORKS -->
 <section id="how">
   <div class="container">
     <h2 class="fade up" data-fade>Menos de 1 minuto para organizar o grupo</h2>
     <div class="steps">
-      <div class="step fade up" data-fade><div class="step-num">1</div><h3>Crie o grupo</h3><p>Dê um nome e convide o pessoal. Todo mundo entra em segundos, sem cadastro complicado.</p></div>
+      <div class="step fade up" data-fade><div class="step-num">1</div><h3>Crie o grupo</h3><p>Dê um nome e convide o pessoal pelo link. Cada um entra no grupo em segundos.</p></div>
       <div class="step fade up" data-fade><div class="step-num">2</div><h3>Registre cada gasto</h3><p>Quem pagou lança na hora: valor, categoria e quem participa. O saldo de cada um atualiza automaticamente.</p></div>
       <div class="step fade up" data-fade><div class="step-num">3</div><h3>Feche as contas</h3><p>O Splity calcula o menor número de transferências e mostra quem paga quem com chave Pix pronta para copiar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SITUAÇÕES -->
+<section id="situations">
+  <div class="container">
+    <h2 class="fade up" data-fade>Cada grupo tem o seu jeito de dividir</h2>
+    <p class="sit-lead fade up" data-fade>Do churrasco de sábado ao aluguel do mês: o Splity se adapta ao jeito que o seu grupo combinou.</p>
+  </div>
+  <div class="sit sit-viagem">
+    <div class="sit-inner">
+      <div class="sit-copy fade up" data-fade>
+        <span class="sit-tag">Viagem</span>
+        <h3>7 pessoas, 1 viagem, zero calculadora.</h3>
+        <p>Mercado, gasolina, pedágio, lanche no parque. Cada um lança o que pagou e, no fim, o Splity diz quem paga quem.</p>
+      </div>
+      <div class="sit-card fade up" data-fade>
+          <div class="sit-card-head"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div><div class="mock-card-name">Viagem Orlando</div><div class="mock-card-sub">7 membros</div></div></div>
+          <div class="sit-row"><div>Mercado<small>pago por Arthur</small></div><b>R$ 420,00</b></div><div class="sit-row"><div>Gasolina<small>pago por Alexandre</small></div><b>R$ 210,00</b></div><div class="sit-row"><div>Pedágio<small>pago por Isis</small></div><b>R$ 70,00</b></div>
+          <div class="sit-sum"><span>Cada um fica com</span><b>R$ 100,00</b></div>
+          <div class="sit-pay">Pedro → Arthur · R$ 100,00<span>Copiar Pix</span></div>
+        </div>
+    </div>
+  </div>
+  <div class="sit sit-ape flip">
+    <div class="sit-inner">
+      <div class="sit-copy fade up" data-fade>
+        <span class="sit-tag">Apê e república</span>
+        <h3>Conta que se repete todo mês, lançada sozinha.</h3>
+        <p>Aluguel, luz, internet. Cadastre uma vez como despesa recorrente e o grupo para de cobrar um ao outro todo dia 5.</p>
+      </div>
+      <div class="sit-card fade up" data-fade>
+          <div class="sit-card-head"><div class="mock-tile" style="background:#dbeafe;">🏠</div><div><div class="mock-card-name">Apê 302</div><div class="mock-card-sub">3 membros</div></div></div>
+          <div class="sit-row"><div>Aluguel<small>pago por Pedro · todo mês</small></div><b>R$ 1.800,00</b></div><div class="sit-row"><div>Luz<small>pago por Pedro · todo mês</small></div><b>R$ 180,00</b></div><div class="sit-row"><div>Internet<small>pago por Pedro · todo mês</small></div><b>R$ 120,00</b></div>
+          <div class="sit-sum"><span>Cada um fica com</span><b>R$ 700,00</b></div>
+          <div class="sit-pay">Fabi → Pedro · R$ 700,00<span>Copiar Pix</span></div>
+        </div>
+    </div>
+  </div>
+  <div class="sit sit-churrasco">
+    <div class="sit-inner">
+      <div class="sit-copy fade up" data-fade>
+        <span class="sit-tag">Churrasco e rolê</span>
+        <h3>Quem bebeu paga a cerveja. Quem não bebeu, não.</h3>
+        <p>Divida igual, por porcentagem ou por item. Cada despesa do jeito que o grupo combinou, sem discussão na hora de pagar.</p>
+      </div>
+      <div class="sit-card fade up" data-fade>
+          <div class="sit-card-head"><div class="mock-tile" style="background:#ffedd5;">🍖</div><div><div class="mock-card-name">Churrasco do Alexandre</div><div class="mock-card-sub">5 membros</div></div></div>
+          <div class="sit-row"><div>Carne e carvão<small>dividido igual · 5 pessoas</small></div><b>R$ 310,00</b></div><div class="sit-row"><div>Cerveja<small>só quem bebeu · 3 pessoas</small></div><b>R$ 90,00</b></div><div class="sit-row"><div>Por pessoa<small>sem álcool · com cerveja</small></div><b>R$ 62 · R$ 92</b></div>
+          <div class="sit-sum"><span>Total do churrasco</span><b>R$ 400,00</b></div>
+          <div class="sit-pay">Fabi → Alexandre · R$ 62,00<span>Copiar Pix</span></div>
+        </div>
+    </div>
+  </div>
+  <div class="sit sit-casal flip">
+    <div class="sit-inner">
+      <div class="sit-copy fade up" data-fade>
+        <span class="sit-tag">Casal</span>
+        <h3>Proporcional à renda, sem planilha escondida.</h3>
+        <p>Nem todo casal divide meio a meio. Defina a porcentagem de cada um e o saldo do mês fecha certo, sem climão.</p>
+      </div>
+      <div class="sit-card fade up" data-fade>
+          <div class="sit-card-head"><div class="mock-tile" style="background:#fce7f3;">💞</div><div><div class="mock-card-name">Casa e mercado</div><div class="mock-card-sub">2 membros</div></div></div>
+          <div class="sit-row"><div>Mercado<small>pago por Isis · 40%</small></div><b>R$ 380,00</b></div><div class="sit-row"><div>Jantar<small>pago por Pedro · 60%</small></div><b>R$ 220,00</b></div><div class="sit-row"><div>Total do mês<small>Pedro 60% · Isis 40%</small></div><b>R$ 600,00</b></div>
+          <div class="sit-sum"><span>Pedro deve a Isis</span><b>R$ 140,00</b></div>
+          <div class="sit-pay">Pedro → Isis · R$ 140,00<span>Copiar Pix</span></div>
+        </div>
     </div>
   </div>
 </section>
@@ -400,11 +587,11 @@
   <div class="container">
     <h2 class="fade up" data-fade>Feito para a vida em grupo</h2>
     <div class="features-grid">
-      <div class="feature-card fade left" data-fade><div class="feature-icon">➗</div><h3>Divisão inteligente</h3><p>Igual, por porcentagem ou por item, cada despesa do jeito que o grupo combinou.</p></div>
-      <div class="feature-card fade right" data-fade><div class="feature-icon">💸</div><h3>Acerto via Pix</h3><p>No fechamento, a chave Pix de quem recebe aparece pronta para copiar. Quitou, sumiu da lista.</p></div>
-      <div class="feature-card fade left" data-fade><div class="feature-badge">Premium</div><div class="feature-icon">📷</div><h3>Scanner de notas com IA</h3><p>Fotografe a nota fiscal e o Splity lança valor, itens e categoria sozinho.</p></div>
-      <div class="feature-card fade right" data-fade><div class="feature-badge">Premium</div><div class="feature-icon">♾️</div><h3>Grupos ilimitados</h3><p>Viagem, apê, futebol de quinta e o que mais aparecer. Sem limite de grupos ou membros.</p></div>
-      <div class="feature-card fade left" data-fade><div class="feature-badge">Premium</div><div class="feature-icon">📊</div><h3>Controle de gastos</h3><p>Veja o resumo de tudo o que você gastou em todos os grupos, com gráfico por categoria. Sem abrir grupo por grupo.</p></div>
+      <div class="feature-card fade left" data-fade><div class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><circle cx="12" cy="6" r="1.4"/><circle cx="12" cy="18" r="1.4"/></svg></div><h3>Divisão inteligente</h3><p>Igual, por porcentagem ou por item, cada despesa do jeito que o grupo combinou.</p></div>
+      <div class="feature-card fade right" data-fade><div class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg></div><h3>Acerto via Pix</h3><p>No fechamento, a chave Pix de quem recebe aparece pronta para copiar. Quitou, sumiu da lista.</p></div>
+      <div class="feature-card fade left" data-fade><div class="feature-badge">Premium</div><div class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg></div><h3>Scanner de notas com IA</h3><p>Fotografe a nota fiscal e o Splity lança valor, itens e categoria sozinho.</p></div>
+      <div class="feature-card fade right" data-fade><div class="feature-badge">Premium</div><div class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></svg></div><h3>Grupos ilimitados</h3><p>Viagem, apê, futebol de quinta e o que mais aparecer. Sem limite de grupos ou membros.</p></div>
+      <div class="feature-card fade left" data-fade><div class="feature-badge">Premium</div><div class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div><h3>Controle de gastos</h3><p>Veja o resumo de tudo o que você gastou em todos os grupos, com gráfico por categoria. Sem abrir grupo por grupo.</p></div>
     </div>
   </div>
 </section>
@@ -412,9 +599,14 @@
 <!-- ORIGIN -->
 <section id="origin">
   <div class="origin-inner fade up" data-fade>
+    <span class="origin-tag">Por que o Splity existe</span>
+    <div class="origin-stats">
+      <div class="origin-stat"><b>7 pessoas</b><span>uma viagem a Orlando</span></div>
+      <div class="origin-stat"><b>Horas</b><span>numa calculadora</span></div>
+      <div class="origin-stat"><b>R$ 23 × R$ 40</b><span>quem devia a quem</span></div>
+    </div>
     <div class="origin-quote">"Em 2024 viajei pra Orlando com a família, 7 pessoas dividindo tudo: mercado, gasolina, pedágio, lanche no parque. Quase todo dia a gente sentava com um monte de nota fiscal tentando lembrar quem tinha pago o quê. Levava horas na calculadora só pra descobrir que eu devia R$23 pro meu cunhado e ele me devia R$40. Foi aí que decidi que ninguém deveria perder tempo com essas contas chatas."</div>
-    <div class="origin-name">Arthur</div>
-    <div class="origin-role">Criador do Splity</div>
+    <div class="origin-person"><div class="origin-avatar">A</div><div><div class="origin-name">Arthur</div><div class="origin-role">Criador do Splity</div></div></div>
     <p style="max-width:520px;margin:24px auto 0;color:rgba(255,255,255,0.75);font-size:14.5px;line-height:1.6;">Testei os apps de divisão que existiam por aí, mas nenhum falava a língua nem entendia o jeito brasileiro de dividir conta: sem Pix, sem nota fiscal daqui. O Splity nasceu pra resolver isso: feito 100% pensando no Brasil.</p>
   </div>
 </section>
@@ -432,7 +624,7 @@
         </div>
         <span class="billing-toggle-label" id="label-anual">Anual <span class="savings-badge">-16%</span></span>
       </div>
-      <span class="billing-note" id="billing-note">Cobrança mensal recorrente via cartão</span>
+      <span class="billing-note" id="billing-note">Cobrança mensal recorrente pela App Store ou Google Play</span>
     </div>
 
     <div class="plans-grid">
@@ -467,13 +659,29 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <h2 class="fade up" data-fade>Perguntas frequentes</h2>
+    <div class="faq-list">
+      <details class="faq-item fade up" data-fade><summary>Meus amigos precisam ter o Splity?</summary><p>Sim. Cada pessoa entra no grupo pelo link de convite e cria a própria conta (nome, e-mail, telefone e CPF). Dá pra usar pelo app no iPhone ou pelo navegador.</p></details>
+      <details class="faq-item fade up" data-fade><summary>Como funciona o acerto via Pix?</summary><p>No fechamento, o Splity mostra quem paga quem e a chave Pix de quem recebe, pronta pra copiar. O Pix em si você faz no app do seu banco, o Splity não movimenta dinheiro.</p></details>
+      <details class="faq-item fade up" data-fade><summary>Quanto custa?</summary><p>O plano Free é grátis para sempre, com limites (até 5 despesas por dia e histórico de 30 dias). O Premium custa R$ 9,90 por mês ou R$ 99,90 por ano, com 7 dias grátis para testar.</p></details>
+      <details class="faq-item fade up" data-fade><summary>Como cancelo o Premium?</summary><p>Direto nos Ajustes do iPhone, em Assinaturas (ou na Google Play). O cancelamento interrompe a renovação, e o acesso continua até o fim do período já pago.</p></details>
+      <details class="faq-item fade up" data-fade><summary>Funciona no Android?</summary><p>Hoje o app está em beta para iPhone, e o Splity também abre no navegador do celular ou do computador. A versão Android está em desenvolvimento.</p></details>
+      <details class="faq-item fade up" data-fade><summary>Posso usar em viagem internacional?</summary><p>Sim, o app tem um seletor com várias moedas, útil para quando o grupo gasta fora do Brasil.</p></details>
+      <details class="faq-item fade up" data-fade><summary>Meus dados estão seguros?</summary><p>Tratamos seus dados conforme a LGPD. Os detalhes estão na Política de Privacidade, e você pode excluir a sua conta pelo próprio app, em Perfil.</p></details>
+    </div>
+  </div>
+</section>
+
 <!-- FINAL CTA -->
 <section id="cta">
   <div class="cta-inner fade up" data-fade>
     <h2>Na próxima vez, você já tem o Splity no celular.</h2>
     <p>Crie o grupo antes do primeiro gasto e ninguém precisa cobrar ninguém depois.</p>
     <a href="https://splity.app.br/register" class="cta-btn">Criar conta grátis</a>
-    <div class="cta-note">Grátis para sempre no plano Free · Premium por R$ 9,90/mês</div>
+    <div class="cta-note">Grátis para sempre no plano Free · Premium por R$ 9,90/mês ou R$ 99,90/ano</div>
   </div>
 </section>
 
@@ -488,8 +696,8 @@
 </footer>
 
 <script>
-  // Toggle mensal/anual do card Premium (so exibicao - cobranca anual
-  // ainda nao esta ativa no checkout, ver billing-note)
+  // Toggle mensal/anual do card Premium (so exibicao - a cobranca e feita
+  // pela App Store/Google Play, ver billing-note)
   let isAnnual = false;
   function toggleBilling() {
     isAnnual = !isAnnual;
@@ -500,8 +708,8 @@
     document.getElementById('premium-period').textContent = isAnnual ? ' /ano' : ' /mês';
     document.getElementById('premium-equiv').textContent = isAnnual ? 'equivale a R$ 8,33/mês' : '';
     document.getElementById('billing-note').textContent = isAnnual
-      ? 'Pagamento anual à vista via Pix ou cartão — em breve'
-      : 'Cobrança mensal recorrente via cartão';
+      ? 'Cobrança anual de uma só vez, pela App Store ou Google Play'
+      : 'Cobrança mensal recorrente pela App Store ou Google Play';
   }
 
   // Fade-in on scroll
@@ -515,7 +723,7 @@
 
   // Demo animado do mockup do app
   const AMIGOS = [
-    { nome: 'Mafe', iniciais: 'M', cor: '#10b981' },
+    { nome: 'Mafê', iniciais: 'M', cor: '#10b981' },
     { nome: 'Fabi', iniciais: 'F', cor: '#f59e0b' },
     { nome: 'Isis', iniciais: 'I', cor: '#ec4899' },
     { nome: 'Arthur', iniciais: 'A', cor: '#4338ca' },
@@ -640,6 +848,40 @@
       ticking = false;
     });
   }, { passive: true });
+</script>
+
+<script>
+  // Calculadora do hero — só exibição, nada é enviado.
+  (function () {
+    var totalEl = document.getElementById('calcTotal');
+    var peopleEl = document.getElementById('calcPeople');
+    var resultEl = document.getElementById('calcResult');
+    var hintEl = document.getElementById('calcHint');
+    if (!totalEl) return;
+    var DEFAULT_HINT = hintEl.textContent;
+    var people = 4;
+    var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    function parse(v) {
+      var n = parseFloat(String(v).replace(/\s/g, '').replace(/\./g, '').replace(',', '.'));
+      return isFinite(n) ? n : NaN;
+    }
+    function render() {
+      peopleEl.textContent = people;
+      var total = parse(totalEl.value);
+      if (!(total > 0)) { resultEl.textContent = '—'; hintEl.textContent = DEFAULT_HINT; return; }
+      var cents = Math.round(total * 100);
+      var each = Math.floor(cents / people);
+      var rest = cents - each * people;
+      resultEl.textContent = brl.format((rest ? each + 1 : each) / 100);
+      hintEl.textContent = rest
+        ? 'Valor arredondado pra cima, por causa dos centavos.'
+        : DEFAULT_HINT;
+    }
+    document.getElementById('calcMinus').addEventListener('click', function () { if (people > 2) { people--; render(); } });
+    document.getElementById('calcPlus').addEventListener('click', function () { if (people < 30) { people++; render(); } });
+    totalEl.addEventListener('input', render);
+    render();
+  })();
 </script>
 </body>
 </html>
