@@ -108,30 +108,57 @@
     .ios-screen { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; position: relative; background: #f6f6fa; font-family: Inter, sans-serif; color: #191735; }
     .ios-island { position: absolute; top: 26px; left: 50%; transform: translateX(-50%); width: 126px; height: 37px; border-radius: 24px; background: #000; z-index: 50; }
     .ios-status { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; padding: 22px 28px 0; font-size: 17px; font-weight: 600; }
-    .ios-content { position: absolute; top: 0; left: 0; right: 0; bottom: 84px; overflow-y: auto; padding: 76px 20px 20px; box-sizing: border-box; }
+    .ios-content { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow-y: auto; padding: 76px 20px 120px; box-sizing: border-box; }
     .ios-step { display: none; }
     .ios-step.active { display: block; }
+    /* Barra de abas igual à do app no iOS 26: cápsula flutuante de vidro, com a
+       aba atual numa pílula. Some nas telas fora das abas (ex.: Adicionar amigos). */
     .ios-tabbar {
-      position: absolute; left: 0; right: 0; bottom: 0; height: 84px;
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(14px);
-      border-top: 1px solid #ececf3; display: flex; align-items: flex-start; justify-content: space-around;
-      padding: 12px 28px 0; box-sizing: border-box;
+      position: absolute; left: 14px; right: 14px; bottom: 18px; height: 66px; z-index: 12;
+      background: rgba(255,255,255,0.66); -webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6);
+      border: 1px solid rgba(255,255,255,0.8); border-radius: 33px;
+      box-shadow: 0 10px 30px rgba(20,18,50,0.14), inset 0 1px 0 rgba(255,255,255,0.8);
+      display: flex; align-items: center; justify-content: space-around; padding: 6px; box-sizing: border-box;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
-    .ios-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #b6b4c8; }
-    .ios-tab.active { color: var(--brand); }
+    .ios-screen.no-tabbar .ios-tabbar { opacity: 0; transform: translateY(24px); pointer-events: none; }
+    .ios-tab { flex: 1; height: 100%; border-radius: 27px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2b2a3d; transition: background 0.25s ease, color 0.25s ease; }
+    .ios-tab.active { color: var(--brand); background: rgba(120,120,140,0.16); }
     .ios-tab span { font-size: 10.5px; font-weight: 600; }
+
+    /* Folha "Novo grupo", aviso e botão fixo da tela Adicionar amigos */
+    .mock-dim { position: absolute; inset: 0; background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 20; }
+    .mock-dim.open { opacity: 1; }
+    .mock-sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 30; background: #fff; border-radius: 26px 26px 0 0; padding: 10px 20px 32px; transform: translateY(105%); transition: transform 0.42s cubic-bezier(0.32,0.72,0,1); }
+    .mock-sheet.open { transform: none; }
+    .mock-sheet-grab { width: 36px; height: 4px; border-radius: 2px; background: #e2e1ee; margin: 0 auto 14px; }
+    .mock-sheet-title { font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .mock-field-label { font-size: 13px; font-weight: 500; color: #7a7894; margin: 12px 0 6px; }
+    .mock-input { height: 48px; border-radius: 14px; border: 1px solid #e5e7eb; background: #f9fafb; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; font-size: 15px; }
+    .mock-placeholder { color: #9ca3af; }
+    .mock-btn-accent { height: 48px; border-radius: 16px; background: #4f46e5; color: #fff; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; transition: transform 0.15s ease, filter 0.15s ease; }
+    .mock-btn-accent.press { transform: scale(0.96); filter: brightness(0.88); }
+    .mock-sheet .mock-btn-accent.criar { margin-top: 18px; }
+    .mock-cta { position: absolute; left: 20px; right: 20px; bottom: 34px; z-index: 15; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease, filter 0.15s ease; }
+    .ios-screen.show-cta .mock-cta { opacity: 1; transform: none; }
+    .mock-cta.press { transform: scale(0.97) !important; filter: brightness(0.88); }
+    .mock-toast { position: absolute; left: 20px; right: 20px; bottom: 100px; z-index: 40; background: #1f1b3a; color: #fff; border-radius: 16px; padding: 13px 16px; font-size: 13.5px; font-weight: 500; opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease; box-shadow: 0 10px 28px rgba(20,18,50,0.28); }
+    .mock-toast.show { opacity: 1; transform: none; }
+    .mock-saldo-sub { font-size: 11.5px; color: #8a88a3; margin-top: 2px; text-align: right; }
+    .mock-linkrow { border: 1.5px dashed #d9d8e6; border-radius: 14px; padding: 13px; text-align: center; font-size: 13.5px; font-weight: 500; color: #7a7894; margin: 0 0 14px; }
+    .mock-back { width: 38px; height: 38px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(20,18,50,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
     .mock-greet-name { font-size: 14px; color: #7a7894; }
     .mock-greet-user { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.1; }
     .mock-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(67,56,202,0.25); }
     .mock-card { background: #fff; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 3px rgba(20,18,50,0.05); transition: outline 0.3s ease; }
-    .mock-tile { width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 23px; flex-shrink: 0; }
+    .mock-tile { background: #eef2ff; width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 23px; flex-shrink: 0; }
     .mock-card-name { font-size: 15px; font-weight: 600; }
     .mock-card-sub { font-size: 12.5px; color: #8a88a3; margin-top: 2px; }
     .mock-fab { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); background: var(--brand-light); color: var(--brand); }
     .mock-fab.active { background: var(--brand); color: #fff; transform: scale(1.08); box-shadow: 0 6px 16px rgba(67,56,202,0.35); }
     .mock-friend { background: #fff; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 13px; box-shadow: 0 1px 3px rgba(20,18,50,0.05); }
-    .mock-friend-avatar { width: 42px; height: 42px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+    .mock-friend-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; flex-shrink: 0; }
     .mock-check { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #cbd5e1; background: transparent; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; margin-left: auto; }
     .mock-check svg { opacity: 0; transition: opacity 0.15s ease; }
     .mock-check.checked svg { opacity: 1; }
@@ -414,9 +441,9 @@
                       <span class="mock-see-all">Ver todos →</span>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
-                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 70,00</div></div>
+                      <div class="mock-card"><div class="mock-tile">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div><div class="mock-saldo-sub">seu saldo</div></div></div>
+                      <div class="mock-card"><div class="mock-tile">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 48,00</div><div class="mock-saldo-sub">seu saldo</div></div></div>
+                      <div class="mock-card"><div class="mock-tile">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 70,00</div><div class="mock-saldo-sub">seu saldo</div></div></div>
                     </div>
                   </div>
 
@@ -430,34 +457,21 @@
                       </div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
-                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 70,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#dbeafe;">🍽️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Almoço Domingo</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
+                      <div class="mock-card"><div class="mock-tile">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 48,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 70,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">🍽️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Almoço Domingo</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 0,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
                     </div>
                   </div>
 
-                  <!-- passo: criar grupo -->
-                  <div class="ios-step" data-step="criar">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:30px;">
-                      <div style="width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(20,18,50,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">←</div>
-                      <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;">Novo grupo</div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;align-items:center;padding:10px 4px 0;">
-                      <div style="width:84px;height:84px;border-radius:24px;background:#fee2e2;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:28px;">🍖</div>
-                      <div style="font-size:13px;color:#7a7894;margin-bottom:8px;align-self:flex-start;">Nome do grupo</div>
-                      <div style="width:100%;box-sizing:border-box;background:#fff;border-radius:16px;padding:16px 18px;font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;min-height:26px;box-shadow:0 1px 3px rgba(20,18,50,0.05);"><span id="nomeDigitado"></span><span id="cursorPipe" style="opacity:0.55;">|</span></div>
-                    </div>
-                  </div>
-
-                  <!-- passo: amigos -->
+                  <!-- passo: Adicionar amigos (página fora das abas: sem barra de abas) -->
                   <div class="ios-step" data-step="amigos">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-                      <div style="width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(20,18,50,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">←</div>
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+                      <div class="mock-back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191735" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
                       <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;">Adicionar amigos</div>
                     </div>
-                    <div style="font-size:13px;color:#7a7894;margin-bottom:14px;">Churrasco</div>
-                    <div id="amigosList" style="display:flex;flex-direction:column;gap:12px;"></div>
+                    <div class="mock-linkrow">🔗 Ou compartilhar link de convite</div>
+                    <div id="amigosList" style="display:flex;flex-direction:column;gap:10px;"></div>
                   </div>
 
                   <!-- passo: aba Grupos (depois de criar) -->
@@ -470,19 +484,34 @@
                       </div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px;">
-                      <div class="mock-card" id="novoGrupoCard"><div class="mock-tile" style="background:#fee2e2;">🍖</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Churrasco</div><div class="mock-card-sub">5 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#8a88a3;">novo</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#fce7f3;">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 48,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#ffedd5;">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#10b981;">+R$ 70,00</div></div>
-                      <div class="mock-card"><div class="mock-tile" style="background:#dbeafe;">🍽️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Almoço Domingo</div><div class="mock-card-sub">3 membros</div></div><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#8a88a3;">em dia</div></div>
+                      <div class="mock-card" id="novoGrupoCard"><div class="mock-tile">🍖</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Churrasco</div><div class="mock-card-sub">1 membro</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 0,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">🎂</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Aniversário Mafê</div><div class="mock-card-sub">4 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#ef4444;">−R$ 18,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">✈️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Viagem Buenos Aires</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 48,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">🍕</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Pizza</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 70,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
+                      <div class="mock-card"><div class="mock-tile">🍽️</div><div style="flex:1;min-width:0;"><div class="mock-card-name">Almoço Domingo</div><div class="mock-card-sub">3 membros</div></div><div style="text-align:right;flex-shrink:0;"><div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#4f46e5;">+R$ 0,00</div><div class="mock-saldo-sub">seu saldo</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b4c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-left:-4px;"><polyline points="9 6 15 12 9 18"/></svg></div>
                     </div>
                   </div>
                 </div>
 
+                <div class="mock-dim" id="mockDim"></div>
+                <div class="mock-sheet" id="mockSheet" aria-hidden="true">
+                  <div class="mock-sheet-grab"></div>
+                  <div class="mock-sheet-title">Novo grupo</div>
+                  <div class="mock-field-label" style="margin-top:0;">Nome do grupo</div>
+                  <div class="mock-input"><span><span id="nomeDigitado"></span><span id="cursorPipe" style="opacity:0.55;">|</span><span class="mock-placeholder" id="nomePlaceholder">Ex: Apartamento, Viagem RJ</span></span></div>
+                  <div class="mock-field-label">Ícone do grupo</div>
+                  <div class="mock-btn-accent" id="iconBtn">Adicionar ícone</div>
+                  <div class="mock-field-label">Moeda</div>
+                  <div class="mock-input"><span>🇧🇷 Real brasileiro (R$)</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b6a85" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                  <div class="mock-btn-accent criar" id="criarBtn">Criar grupo</div>
+                </div>
+                <div class="mock-btn-accent mock-cta" id="mockCta">Convidar 0 pessoas</div>
+                <div class="mock-toast" id="mockToast">Convites enviados! Cada pessoa recebe uma notificação.</div>
+
                 <div class="ios-tabbar">
                   <div class="ios-tab active" data-tab="inicio"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg><span>Início</span></div>
-                  <div class="ios-tab" data-tab="grupos"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 9v6M20 12h-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Grupos</span></div>
-                  <div class="ios-tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 4h9l3 3v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 11h8M8 15h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Atividade</span></div>
+                  <div class="ios-tab" data-tab="grupos"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Grupos</span></div>
+                  <div class="ios-tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg><span>Atividade</span></div>
                   <div class="ios-tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c0-3.3 3-6 7-6s7 2.7 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Perfil</span></div>
                 </div>
               </div>
@@ -530,7 +559,7 @@
         <p>Mercado, gasolina, pedágio, lanche no parque. Cada um lança o que pagou e, no fim, o Splity diz quem paga quem.</p>
       </div>
       <div class="sit-card fade up" data-fade>
-          <div class="sit-card-head"><div class="mock-tile" style="background:#e0e7ff;">✈️</div><div><div class="mock-card-name">Viagem Orlando</div><div class="mock-card-sub">7 membros</div></div></div>
+          <div class="sit-card-head"><div class="mock-tile">✈️</div><div><div class="mock-card-name">Viagem Orlando</div><div class="mock-card-sub">7 membros</div></div></div>
           <div class="sit-row"><div>Mercado<small>pago por Arthur</small></div><b>R$ 420,00</b></div><div class="sit-row"><div>Gasolina<small>pago por Alexandre</small></div><b>R$ 210,00</b></div><div class="sit-row"><div>Pedágio<small>pago por Isis</small></div><b>R$ 70,00</b></div>
           <div class="sit-sum"><span>Cada um fica com</span><b>R$ 100,00</b></div>
           <div class="sit-pay">Pedro → Arthur · R$ 100,00<span>Copiar Pix</span></div>
@@ -545,7 +574,7 @@
         <p>Aluguel, luz, internet. Cadastre uma vez como despesa recorrente e o grupo para de cobrar um ao outro todo dia 5.</p>
       </div>
       <div class="sit-card fade up" data-fade>
-          <div class="sit-card-head"><div class="mock-tile" style="background:#dbeafe;">🏠</div><div><div class="mock-card-name">Apê 302</div><div class="mock-card-sub">3 membros</div></div></div>
+          <div class="sit-card-head"><div class="mock-tile">🏠</div><div><div class="mock-card-name">Apê 302</div><div class="mock-card-sub">3 membros</div></div></div>
           <div class="sit-row"><div>Aluguel<small>pago por Pedro · todo mês</small></div><b>R$ 1.800,00</b></div><div class="sit-row"><div>Luz<small>pago por Pedro · todo mês</small></div><b>R$ 180,00</b></div><div class="sit-row"><div>Internet<small>pago por Pedro · todo mês</small></div><b>R$ 120,00</b></div>
           <div class="sit-sum"><span>Cada um fica com</span><b>R$ 700,00</b></div>
           <div class="sit-pay">Fabi → Pedro · R$ 700,00<span>Copiar Pix</span></div>
@@ -560,7 +589,7 @@
         <p>Divida igual, por porcentagem ou por item. Cada despesa do jeito que o grupo combinou, sem discussão na hora de pagar.</p>
       </div>
       <div class="sit-card fade up" data-fade>
-          <div class="sit-card-head"><div class="mock-tile" style="background:#ffedd5;">🍖</div><div><div class="mock-card-name">Churrasco do Alexandre</div><div class="mock-card-sub">5 membros</div></div></div>
+          <div class="sit-card-head"><div class="mock-tile">🍖</div><div><div class="mock-card-name">Churrasco do Alexandre</div><div class="mock-card-sub">5 membros</div></div></div>
           <div class="sit-row"><div>Carne e carvão<small>dividido igual · 5 pessoas</small></div><b>R$ 310,00</b></div><div class="sit-row"><div>Cerveja<small>só quem bebeu · 3 pessoas</small></div><b>R$ 90,00</b></div><div class="sit-row"><div>Por pessoa<small>sem álcool · com cerveja</small></div><b>R$ 62 · R$ 92</b></div>
           <div class="sit-sum"><span>Total do churrasco</span><b>R$ 400,00</b></div>
           <div class="sit-pay">Fabi → Alexandre · R$ 62,00<span>Copiar Pix</span></div>
@@ -575,7 +604,7 @@
         <p>Nem todo casal divide meio a meio. Defina a porcentagem de cada um e o saldo do mês fecha certo, sem climão.</p>
       </div>
       <div class="sit-card fade up" data-fade>
-          <div class="sit-card-head"><div class="mock-tile" style="background:#fce7f3;">💞</div><div><div class="mock-card-name">Casa e mercado</div><div class="mock-card-sub">2 membros</div></div></div>
+          <div class="sit-card-head"><div class="mock-tile">💞</div><div><div class="mock-card-name">Casa e mercado</div><div class="mock-card-sub">2 membros</div></div></div>
           <div class="sit-row"><div>Mercado<small>pago por Isis · 40%</small></div><b>R$ 380,00</b></div><div class="sit-row"><div>Jantar<small>pago por Pedro · 60%</small></div><b>R$ 220,00</b></div><div class="sit-row"><div>Total do mês<small>Pedro 60% · Isis 40%</small></div><b>R$ 600,00</b></div>
           <div class="sit-sum"><span>Pedro deve a Isis</span><b>R$ 140,00</b></div>
           <div class="sit-pay">Pedro → Isis · R$ 140,00<span>Copiar Pix</span></div>
@@ -723,25 +752,35 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-fade]').forEach((el) => observer.observe(el));
 
-  // Demo animado do mockup do app
+  // Demo animado do mockup do app — segue o fluxo real: aba Grupos → "+" →
+  // folha "Novo grupo" → Adicionar amigos → convites enviados.
   const AMIGOS = [
-    { nome: 'Mafê', iniciais: 'M', cor: '#10b981' },
-    { nome: 'Fabi', iniciais: 'F', cor: '#f59e0b' },
-    { nome: 'Isis', iniciais: 'I', cor: '#ec4899' },
-    { nome: 'Arthur', iniciais: 'A', cor: '#4338ca' },
-    { nome: 'Alexandre', iniciais: 'AL', cor: '#8b5cf6' },
-    { nome: 'Pedro', iniciais: 'P', cor: '#3b82f6' },
+    { nome: 'Mafê', iniciais: 'M', bg: '#dcfce7', fg: '#16a34a' },
+    { nome: 'Fabi', iniciais: 'F', bg: '#fef3c7', fg: '#92400e' },
+    { nome: 'Isis', iniciais: 'I', bg: '#fce7f3', fg: '#9d174d' },
+    { nome: 'Arthur', iniciais: 'A', bg: '#ede9fe', fg: '#5b21b6' },
+    { nome: 'Alexandre', iniciais: 'AL', bg: '#dbeafe', fg: '#1d4ed8' },
+    { nome: 'Pedro', iniciais: 'P', bg: '#ffedd5', fg: '#c2410c' },
   ];
+  const ACCENT = '#4f46e5';
   const steps = document.querySelectorAll('.ios-step');
+  const mockScreen = document.querySelector('.ios-screen');
   const amigosList = document.getElementById('amigosList');
   const nomeDigitadoEl = document.getElementById('nomeDigitado');
+  const nomePlaceholderEl = document.getElementById('nomePlaceholder');
   const cursorEl = document.getElementById('cursorPipe');
   const fabBtn = document.getElementById('fabBtn');
   const novoGrupoCard = document.getElementById('novoGrupoCard');
+  const mockDim = document.getElementById('mockDim');
+  const mockSheet = document.getElementById('mockSheet');
+  const iconBtn = document.getElementById('iconBtn');
+  const criarBtn = document.getElementById('criarBtn');
+  const mockCta = document.getElementById('mockCta');
+  const mockToast = document.getElementById('mockToast');
 
   amigosList.innerHTML = AMIGOS.map((a, i) => `
     <div class="mock-friend">
-      <div class="mock-friend-avatar" style="background:${a.cor};">${a.iniciais}</div>
+      <div class="mock-friend-avatar" style="background:${a.bg};color:${a.fg};">${a.iniciais}</div>
       <div style="flex:1;font-size:15.5px;font-weight:600;">${a.nome}</div>
       <div class="mock-check" data-i="${i}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
     </div>
@@ -749,16 +788,30 @@
   const checkEls = amigosList.querySelectorAll('.mock-check');
 
   // Cada passo do demo pertence a uma aba (Início ou Grupos) — troca a
-  // aba destacada na tab bar junto com o passo, pra parecer navegação real.
+  // aba destacada na barra junto com o passo, pra parecer navegação real.
   const tabInicio = document.querySelector('.ios-tab[data-tab="inicio"]');
   const tabGrupos = document.querySelector('.ios-tab[data-tab="grupos"]');
-  const STEP_TAB = { inicio: 'inicio', grupos: 'grupos', criar: 'grupos', amigos: 'grupos', 'grupos-home': 'grupos' };
+  const STEP_TAB = { inicio: 'inicio', grupos: 'grupos', amigos: 'grupos', 'grupos-home': 'grupos' };
 
   function showStep(name) {
     steps.forEach((s) => s.classList.toggle('active', s.dataset.step === name));
     const tab = STEP_TAB[name] || 'inicio';
     tabInicio.classList.toggle('active', tab === 'inicio');
     tabGrupos.classList.toggle('active', tab === 'grupos');
+    // Adicionar amigos é uma página fora das abas: sem barra de abas, com o botão de convidar
+    mockScreen.classList.toggle('no-tabbar', name === 'amigos');
+  }
+  function setSheet(open) { mockSheet.classList.toggle('open', open); mockDim.classList.toggle('open', open); }
+  function setCheck(i, on) {
+    const el = checkEls[i];
+    el.classList.toggle('checked', on);
+    el.style.borderColor = on ? ACCENT : '#cbd5e1';
+    el.style.background = on ? ACCENT : 'transparent';
+  }
+  function press(el) { el.classList.add('press'); setTimeout(() => el.classList.remove('press'), 220); }
+  function setNome(txt) {
+    nomeDigitadoEl.textContent = txt;
+    nomePlaceholderEl.style.display = txt ? 'none' : 'inline';
   }
 
   const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -787,52 +840,70 @@
     });
   }
 
+  function resetDemo() {
+    checkEls.forEach((_, i) => setCheck(i, false));
+    fabBtn.classList.remove('active');
+    novoGrupoCard.style.outline = 'none';
+    setNome('');
+    iconBtn.textContent = 'Adicionar ícone';
+    setSheet(false);
+    mockScreen.classList.remove('show-cta');
+    mockToast.classList.remove('show');
+    mockCta.textContent = 'Convidar 0 pessoas';
+    showStep('inicio');
+  }
+
   function runDemo() {
     if (hovering) { waitingToRestart = true; return; }
     cycleCount++;
     timers.forEach(clearTimeout);
     timers.length = 0;
-    checkEls.forEach((el) => { el.classList.remove('checked'); el.style.borderColor = '#cbd5e1'; el.style.background = 'transparent'; });
-    fabBtn.classList.remove('active');
-    novoGrupoCard.style.outline = 'none';
-    nomeDigitadoEl.textContent = '';
-    showStep('inicio');
+    resetDemo();
 
-    const tDepoisInicio = 2800;
-    t(() => showStep('grupos'), tDepoisInicio);
-    t(() => fabBtn.classList.add('active'), tDepoisInicio + 1700);
-    const tDepoisFab = tDepoisInicio + 1700 + 700;
-
-    t(() => showStep('criar'), tDepoisFab);
+    // Ritmo pensado pra dar tempo de ler cada tela (os amigos são marcados
+    // um a um, a ~0,5s cada — antes eram 90ms e passava rápido demais).
+    const INICIO = 3200;
+    const FRIEND_STEP = 520;
+    const TYPE_STEP = 130;
     const nomeAlvo = 'Churrasco';
+
+    let at = INICIO;
+    t(() => showStep('grupos'), at);
+    at += 1800;
+    t(() => fabBtn.classList.add('active'), at);                 // toca no "+"
+    at += 700;
+    t(() => { fabBtn.classList.remove('active'); setSheet(true); }, at);   // abre a folha "Novo grupo"
+    at += 1100;
     for (let i = 1; i <= nomeAlvo.length; i++) {
-      t(() => { nomeDigitadoEl.textContent = nomeAlvo.slice(0, i); }, tDepoisFab + 400 + i * 110);
+      t(() => setNome(nomeAlvo.slice(0, i)), at + i * TYPE_STEP);
     }
-    const tDepoisDigitar = tDepoisFab + 400 + nomeAlvo.length * 110 + 700;
-
-    // Intervalo entre cada amigo marcado: era 650ms (6 amigos = 3.250ms só
-    // nessa etapa), bem acima do teto de 500ms de stagger total recomendado
-    // pra um grupo de elementos revelados em sequência. 90ms mantém dá pra
-    // acompanhar visualmente e fica dentro do teto (5 intervalos = 450ms).
-    t(() => showStep('amigos'), tDepoisDigitar);
-    checkEls.forEach((el, i) => {
-      t(() => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; }, tDepoisDigitar + 500 + i * 90);
+    at += nomeAlvo.length * TYPE_STEP + 600;
+    t(() => { press(iconBtn); iconBtn.textContent = '🍖'; }, at);       // escolhe o ícone
+    at += 1100;
+    t(() => press(criarBtn), at);                                // "Criar grupo"
+    at += 450;
+    t(() => { setSheet(false); showStep('grupos-home'); novoGrupoCard.style.outline = '2px solid ' + ACCENT; novoGrupoCard.style.outlineOffset = '2px'; }, at);
+    at += 2200;
+    t(() => { novoGrupoCard.style.outline = 'none'; showStep('amigos'); mockScreen.classList.add('show-cta'); }, at);   // Convidar → Adicionar amigos
+    at += 1500;
+    AMIGOS.forEach((_, i) => {
+      t(() => { setCheck(i, true); mockCta.textContent = 'Convidar ' + (i + 1) + ' pessoa' + (i ? 's' : ''); }, at + i * FRIEND_STEP);
     });
-    const tDepoisAmigos = tDepoisDigitar + 500 + AMIGOS.length * 90 + 700;
-
-    t(() => { showStep('grupos-home'); novoGrupoCard.style.outline = '2px solid #4338ca'; novoGrupoCard.style.outlineOffset = '2px'; }, tDepoisAmigos);
-    t(() => { novoGrupoCard.style.outline = 'none'; }, tDepoisAmigos + 1400);
+    at += AMIGOS.length * FRIEND_STEP + 700;
+    t(() => press(mockCta), at);                                 // "Convidar 6 pessoas"
+    at += 450;
+    t(() => { mockScreen.classList.remove('show-cta'); showStep('grupos-home'); mockToast.classList.add('show'); novoGrupoCard.style.outline = '2px solid ' + ACCENT; novoGrupoCard.style.outlineOffset = '2px'; }, at);
+    at += 2600;
+    t(() => { mockToast.classList.remove('show'); novoGrupoCard.style.outline = 'none'; }, at);
 
     if (cycleCount < MAX_CYCLES) {
-      const tFimCiclo = tDepoisAmigos + 2600;
-      t(runDemo, tFimCiclo);
+      t(runDemo, at + 1800);
     }
   }
 
   if (prefersReducedMotion) {
     // Pula direto pro resultado final, sem digitar/marcar um por um.
-    nomeDigitadoEl.textContent = 'Churrasco';
-    checkEls.forEach((el, i) => { el.classList.add('checked'); el.style.borderColor = AMIGOS[i].cor; el.style.background = AMIGOS[i].cor; });
+    novoGrupoCard.style.outline = 'none';
     showStep('grupos-home');
   } else {
     runDemo();
