@@ -41,11 +41,16 @@
       --bg-gray: #f8fafc;
       --border: #e2e8f0;
       --radius-lg: 20px;
+      /* Space Grotesk só no nome "Splity"; o resto do site usa a fonte do sistema da
+         Apple (SF Pro no iPhone/Mac) e, onde ela não existe, a Inter (parecida). */
+      --font-brand: 'Space Grotesk', sans-serif;
+      --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
+    .sit-row b, .sit-sum b, .dm-transfer b, .dm-bal b, .dm-money input, .plan-price .amount { font-variant-numeric: tabular-nums; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-ui);
       color: var(--text);
       background: var(--bg);
       -webkit-font-smoothing: antialiased;
@@ -84,7 +89,7 @@
       border-bottom: 1px solid #e2e8f0;
     }
     .nav-inner { max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--brand); text-decoration: none; letter-spacing: -0.4px; }
+    .nav-logo { font-family: var(--font-brand); font-size: 30px; font-weight: 700; color: var(--brand); text-decoration: none; letter-spacing: -0.4px; }
     .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav-links a { text-decoration: none; transition: all 0.15s cubic-bezier(0.4,0,0.2,1); }
     .nav-enter { font-size: 14px; font-weight: 600; color: var(--text); }
@@ -101,10 +106,10 @@
       overflow: hidden;
     }
     .hero-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
-    .hero-text { flex: 1 1 50%; max-width: 460px; min-width: 260px; }
-    .hero-text h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(38px,5vw,58px); font-weight: 700; line-height: 1.08; letter-spacing: -1px; margin-bottom: 22px; }
+    .hero-text { flex: 1 1 56%; max-width: 620px; min-width: 260px; }
+    .hero-text h1 { font-family: var(--font-ui); font-size: clamp(42px,6.2vw,80px); font-weight: 700; line-height: 1.03; letter-spacing: -0.035em; margin-bottom: 26px; }
     .hero-text h1 em { color: var(--brand); font-style: normal; }
-    .hero-text p { font-size: clamp(16px,1.6vw,19px); color: var(--text-muted); max-width: 480px; margin-bottom: 30px; }
+    .hero-text p { font-size: clamp(17px,1.7vw,21px); line-height: 1.45; letter-spacing: -0.011em; color: var(--text-muted); max-width: 520px; margin-bottom: 34px; }
     .hero-cta {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--brand); color: #fff; font-size: 16px; font-weight: 600;
@@ -117,7 +122,7 @@
     .hero-app { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none; border-bottom: 1.5px solid rgba(67,56,202,0.3); padding-bottom: 1px; }
     .hero-app:hover { border-bottom-color: var(--brand); }
 
-    .hero-mockup-col { flex: 1 1 50%; min-width: 280px; display: flex; justify-content: flex-end; padding-right: 64px; box-sizing: border-box; }
+    .hero-mockup-col { flex: 1 1 36%; min-width: 280px; display: flex; justify-content: flex-end; padding-right: 64px; box-sizing: border-box; }
     .phone-outer { width: 289px; height: 629px; flex: none; }
     .phone-scale { width: 402px; height: 874px; transform: scale(0.7188); transform-origin: top left; filter: drop-shadow(0 30px 60px rgba(15,23,42,0.25)); }
     .ios-device { width: 402px; height: 874px; border-radius: 48px; background: #000; padding: 12px; box-sizing: border-box; position: relative; }
@@ -165,8 +170,8 @@
     .mock-back { width: 38px; height: 38px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(20,18,50,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
     .mock-greet-name { font-size: 14px; color: #7a7894; }
-    .mock-greet-user { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.1; }
-    .mock-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(67,56,202,0.25); }
+    .mock-greet-user { font-family: var(--font-brand); font-size: 26px; font-weight: 700; line-height: 1.1; }
+    .mock-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-brand); font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(67,56,202,0.25); }
     .mock-card { background: #fff; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 3px rgba(20,18,50,0.05); transition: outline 0.3s ease; }
     .mock-tile { background: #eef2ff; width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 23px; flex-shrink: 0; }
     .mock-card-name { font-size: 15px; font-weight: 600; }
@@ -174,7 +179,7 @@
     .mock-fab { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); background: var(--brand-light); color: var(--brand); }
     .mock-fab.active { background: var(--brand); color: #fff; transform: scale(1.08); box-shadow: 0 6px 16px rgba(67,56,202,0.35); }
     .mock-friend { background: #fff; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 13px; box-shadow: 0 1px 3px rgba(20,18,50,0.05); }
-    .mock-friend-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+    .mock-friend-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-brand); font-weight: 700; font-size: 15px; flex-shrink: 0; }
     .mock-check { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #cbd5e1; background: transparent; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; margin-left: auto; }
     .mock-check svg { opacity: 0; transition: opacity 0.15s ease; }
     .mock-check.checked svg { opacity: 1; }
@@ -185,7 +190,7 @@
     .mock-hero-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
     .mock-hero-label { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; }
     .mock-currency-pill { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.18); border-radius: 999px; padding: 3px 9px 3px 10px; font-size: 10.5px; font-weight: 600; }
-    .mock-hero-total { font-family: 'Space Grotesk', sans-serif; font-size: 27px; font-weight: 800; letter-spacing: -0.5px; }
+    .mock-hero-total { font-family: var(--font-brand); font-size: 27px; font-weight: 800; letter-spacing: -0.5px; }
     .mock-hero-subs { display: flex; gap: 8px; margin-top: 14px; }
     .mock-hero-sub { flex: 1; background: rgba(255,255,255,0.14); border-radius: 12px; padding: 8px 10px; }
     .mock-hero-sub-label { font-size: 10px; color: rgba(255,255,255,0.75); margin-bottom: 2px; }
@@ -198,16 +203,16 @@
     .mock-bell-dot { position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 50%; background: #ef4444; border: 1.5px solid #fff; }
 
     /* ── SECTIONS ── */
-    section { padding: 90px 24px; }
+    section { padding: 110px 24px; }
     .container { max-width: 1120px; margin: 0 auto; }
-    h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px,3.4vw,40px); font-weight: 700; letter-spacing: -0.6px; text-align: center; margin-bottom: 56px; }
+    h2 { font-family: var(--font-ui); font-size: clamp(32px,4.8vw,56px); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; text-align: center; margin-bottom: 64px; }
 
     /* ── HOW IT WORKS ── */
     #how { background: var(--bg-gray); }
     .steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 36px; }
     .step { text-align: center; padding: 0 12px; }
-    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 18px; }
-    .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-ui); font-size: 20px; font-weight: 700; margin-bottom: 18px; }
+    .step h3 { font-family: var(--font-ui); font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
     .step p { font-size: 14.5px; color: var(--text-muted); }
 
     /* ── FEATURES ── */
@@ -216,14 +221,14 @@
     .feature-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15,23,42,0.08); }
     .feature-icon { width: 44px; height: 44px; border-radius: 13px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
     .feature-icon svg, .trust-item svg { width: 22px; height: 22px; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .feature-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .feature-card h3 { font-family: var(--font-ui); font-size: 18px; font-weight: 700; margin-bottom: 6px; }
     .feature-card p { font-size: 14px; color: var(--text-muted); }
     .feature-badge { position: absolute; top: 20px; right: 20px; background: var(--brand); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 99px; padding: 4px 10px; }
 
     /* ── ORIGIN ── */
     #origin { background: var(--brand); padding: 100px 24px; }
     .origin-inner { max-width: 820px; margin: 0 auto; text-align: center; color: #fff; }
-    .origin-quote { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px,3vw,32px); font-weight: 600; line-height: 1.35; letter-spacing: -0.4px; }
+    .origin-quote { font-family: var(--font-ui); font-size: clamp(22px,3vw,32px); font-weight: 600; line-height: 1.35; letter-spacing: -0.02em; }
     .origin-name { margin-top: 28px; font-size: 15px; font-weight: 600; }
     .origin-role { font-size: 13px; opacity: 0.75; }
 
@@ -231,10 +236,10 @@
     .origin-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 99px; background: rgba(255,255,255,0.16); margin-bottom: 26px; }
     .origin-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin: 0 0 34px; }
     .origin-stat { background: rgba(255,255,255,0.12); border-radius: 18px; padding: 14px 22px; min-width: 150px; }
-    .origin-stat b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.6px; }
+    .origin-stat b { display: block; font-family: var(--font-ui); font-size: 28px; font-weight: 800; letter-spacing: -0.6px; }
     .origin-stat span { font-size: 13px; opacity: 0.75; }
     .origin-person { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 30px; text-align: left; }
-    .origin-avatar { width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 19px; }
+    .origin-avatar { width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-family: var(--font-ui); font-weight: 800; font-size: 19px; }
     .origin-person .origin-name { margin-top: 0; }
 
     /* ── PLANS ── */
@@ -255,10 +260,10 @@
     .plan-card.featured { border: 2px solid var(--brand); background: linear-gradient(160deg, #fff 0%, var(--brand-light) 100%); position: relative; }
     .plan-card.featured:hover { box-shadow: 0 16px 34px rgba(67,56,202,0.18); }
     .plan-popular { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 99px; padding: 5px 14px; white-space: nowrap; }
-    .plan-name { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 700; }
+    .plan-name { font-family: var(--font-ui); font-size: 19px; font-weight: 700; }
     .plan-card.featured .plan-name { color: var(--brand); }
     .plan-price { margin: 10px 0 22px; }
-    .plan-price .amount { font-family: 'Space Grotesk', sans-serif; font-size: 38px; font-weight: 700; }
+    .plan-price .amount { font-family: var(--font-ui); font-size: 38px; font-weight: 700; }
     .plan-price .period { font-size: 14px; color: var(--text-muted); }
     .plan-features { display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; flex: 1; }
     .plan-features div { display: flex; gap: 10px; }
@@ -275,13 +280,13 @@
     #situations { padding: 90px 0 0; }
     #situations > .container { padding: 0 24px; }
     #situations h2 { margin-bottom: 14px; }
-    .sit-lead { text-align: center; color: var(--text-muted); font-size: 17px; max-width: 560px; margin: 0 auto 56px; }
+    .sit-lead { text-align: center; color: var(--text-muted); font-size: 19px; letter-spacing: -0.011em; max-width: 580px; margin: 0 auto 64px; }
     .sit { padding: 84px 24px; }
     .sit-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     .sit.flip .sit-copy { order: 2; }
     .sit-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; margin-bottom: 18px; background: rgba(30,27,75,0.10); }
-    .sit h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px,4.4vw,54px); font-weight: 700; line-height: 1.05; letter-spacing: -1.2px; margin-bottom: 18px; }
-    .sit p { font-size: 17px; line-height: 1.55; max-width: 440px; opacity: 0.82; }
+    .sit h3 { font-family: var(--font-ui); font-size: clamp(34px,5.4vw,68px); font-weight: 700; line-height: 1.03; letter-spacing: -0.035em; margin-bottom: 20px; }
+    .sit p { font-size: 19px; line-height: 1.5; letter-spacing: -0.011em; max-width: 460px; opacity: 0.82; }
     .sit-viagem { background: var(--brand); color: #fff; }
     .sit-viagem .sit-tag { background: rgba(255,255,255,0.16); }
     /* Seções por situação: só índigo e os tons dele (marca → lilás → azul-marinho → lilás forte) */
@@ -294,9 +299,9 @@
     .sit-card-head { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid #eef0f6; margin-bottom: 8px; }
     .sit-row { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; font-size: 14.5px; border-bottom: 1px solid #f3f4f8; }
     .sit-row small { display: block; color: #8a88a3; font-size: 12px; margin-top: 1px; }
-    .sit-row b { font-family: 'Space Grotesk', sans-serif; font-weight: 700; white-space: nowrap; }
+    .sit-row b { font-family: var(--font-ui); font-weight: 700; white-space: nowrap; }
     .sit-sum { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0 6px; font-size: 14px; color: #6b6a85; }
-    .sit-sum b { font-family: 'Space Grotesk', sans-serif; font-size: 22px; color: var(--text); letter-spacing: -0.4px; }
+    .sit-sum b { font-family: var(--font-ui); font-size: 22px; color: var(--text); letter-spacing: -0.4px; }
     .sit-pay { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--brand-light); border-radius: 16px; padding: 12px 14px; font-size: 13.5px; font-weight: 600; color: var(--brand-dark); }
     .sit-pay span { background: var(--brand); color: #fff; border-radius: 99px; padding: 6px 12px; font-size: 12px; font-weight: 700; white-space: nowrap; }
 
@@ -314,7 +319,7 @@
     .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { border: 1px solid var(--border); border-radius: 16px; background: #fff; transition: border-color 0.15s, box-shadow 0.15s; }
     .faq-item[open] { border-color: var(--brand); box-shadow: 0 8px 22px rgba(67,56,202,0.08); }
-    .faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; font-family: var(--font-ui); font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .faq-item summary::-webkit-details-marker { display: none; }
     .faq-item summary::after { content: '+'; font-size: 24px; font-weight: 500; color: var(--brand); line-height: 1; transition: transform 0.2s; flex-shrink: 0; }
     .faq-item[open] summary::after { transform: rotate(45deg); }
@@ -324,38 +329,38 @@
 
     /* ── DEMONSTRAÇÃO: QUEM PAGA QUEM ── */
     #demo { background: #fff; }
-    .dm-lead { text-align: center; color: var(--text-muted); font-size: 17px; max-width: 560px; margin: -36px auto 44px; }
+    .dm-lead { text-align: center; color: var(--text-muted); font-size: 19px; letter-spacing: -0.011em; max-width: 580px; margin: -40px auto 48px; }
     .dm-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 28px; align-items: start; max-width: 1040px; margin: 0 auto; }
     .dm-list { display: flex; flex-direction: column; gap: 14px; }
     .dm-exp { border: 1px solid var(--border); border-radius: 20px; padding: 18px 20px; background: #fff; }
     .dm-exp-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .dm-exp-name { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; }
+    .dm-exp-name { font-family: var(--font-ui); font-size: 18px; font-weight: 700; }
     .dm-money { display: flex; align-items: center; gap: 6px; background: var(--bg-gray); border: 1.5px solid var(--border); border-radius: 12px; padding: 0 12px; height: 42px; transition: border-color 0.15s, box-shadow 0.15s; }
     .dm-money:focus-within { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(67,56,202,0.12); }
     .dm-money span { font-weight: 700; color: var(--text-muted); font-size: 14px; }
-    .dm-money input { border: 0; outline: 0; background: transparent; width: 92px; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+    .dm-money input { border: 0; outline: 0; background: transparent; width: 92px; font-family: var(--font-ui); font-size: 18px; font-weight: 700; color: var(--text); }
     .dm-row { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
     .dm-label { font-size: 12.5px; font-weight: 600; color: var(--text-muted); min-width: 78px; }
-    .dm-select { height: 36px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; padding: 0 30px 0 12px; font: 600 14px 'Inter', sans-serif; color: var(--text); cursor: pointer; }
+    .dm-select { height: 36px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; padding: 0 30px 0 12px; font: 600 14px var(--font-ui); color: var(--text); cursor: pointer; }
     .dm-select:focus-visible, .dm-chip:focus-visible, .dm-reset:focus-visible { outline: 3px solid rgba(67,56,202,0.4); outline-offset: 2px; }
     .dm-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .dm-chip { border: 1.5px solid var(--border); background: var(--brand-light); color: var(--text-muted); border-radius: 999px; padding: 7px 14px; font: 600 13.5px 'Inter', sans-serif; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.12s; }
+    .dm-chip { border: 1.5px solid var(--border); background: var(--brand-light); color: var(--text-muted); border-radius: 999px; padding: 7px 14px; font: 600 13.5px var(--font-ui); cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.12s; }
     .dm-chip:active { transform: scale(0.96); }
     .dm-chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
     .dm-hint { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; min-height: 18px; }
     .dm-result { background: #1e1b4b; color: #fff; border-radius: 24px; padding: 26px 24px; position: sticky; top: 92px; }
-    .dm-result h3 { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #a5b4fc; margin-bottom: 12px; }
+    .dm-result h3 { font-family: var(--font-ui); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #a5b4fc; margin-bottom: 12px; }
     .dm-transfer { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(255,255,255,0.08); border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; font-size: 15px; font-weight: 600; }
-    .dm-transfer b { font-family: 'Space Grotesk', sans-serif; font-size: 17px; white-space: nowrap; }
+    .dm-transfer b { font-family: var(--font-ui); font-size: 17px; white-space: nowrap; }
     .dm-arrow { color: #a5b4fc; margin: 0 4px; }
     .dm-balances { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.14); }
     .dm-bal { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14.5px; }
-    .dm-bal b { font-family: 'Space Grotesk', sans-serif; }
+    .dm-bal b { font-family: var(--font-ui); }
     .dm-bal .pos { color: #c7d2fe; }
     .dm-bal .neg { color: #fca5a5; }
     .dm-empty { color: #c7d2fe; font-size: 15px; padding: 6px 0; }
     .dm-foot { margin-top: 18px; font-size: 12.5px; color: #a5b4fc; line-height: 1.5; }
-    .dm-reset { margin-top: 14px; background: none; border: 0; color: var(--brand); font: 600 14px 'Inter', sans-serif; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .dm-reset { margin-top: 14px; background: none; border: 0; color: var(--brand); font: 600 14px var(--font-ui); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
     @media (max-width: 860px) {
       .dm-grid { grid-template-columns: 1fr; }
       .dm-result { position: static; }
@@ -374,7 +379,7 @@
     /* ── FOOTER ── */
     footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; }
     .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
+    .footer-logo { font-family: var(--font-brand); font-size: 18px; font-weight: 700; color: #fff; }
     .footer-links { display: flex; gap: 24px; font-size: 13px; }
     .footer-links a { color: #94a3b8; text-decoration: none; transition: color 0.15s; }
     .footer-links a:hover { color: #fff; }
@@ -409,7 +414,7 @@
       <div class="hero-text fade up" data-fade>
         <h1>A divisão que não <em>estraga a festa</em></h1>
         <p>Viagem, apê, churrasco: registre cada gasto em segundos e o Splity calcula quem paga quem. Sem planilha, sem climão, sem "depois a gente vê".</p>
-        <a href="#plans" class="hero-cta">Experimentar grátis <span style="font-family:'Space Grotesk',sans-serif;">→</span></a>
+        <a href="#plans" class="hero-cta">Experimentar grátis <span style="font-family:var(--font-ui);">→</span></a>
         <p class="hero-note">7 dias Premium grátis · Cancele antes e não paga nada</p>
         <a class="hero-app" href="https://testflight.apple.com/join/ZAApR7mg" target="_blank" rel="noopener">Baixar o app para iPhone (beta) →</a>
       </div>
@@ -576,9 +581,9 @@
       </div>
       <div class="sit-card fade up" data-fade>
           <div class="sit-card-head"><div class="mock-tile">✈️</div><div><div class="mock-card-name">Viagem Orlando</div><div class="mock-card-sub">7 membros</div></div></div>
-          <div class="sit-row"><div>Mercado<small>pago por Arthur</small></div><b>R$ 420,00</b></div><div class="sit-row"><div>Gasolina<small>pago por Alexandre</small></div><b>R$ 210,00</b></div><div class="sit-row"><div>Pedágio<small>pago por Isis</small></div><b>R$ 70,00</b></div>
-          <div class="sit-sum"><span>Cada um fica com</span><b>R$ 100,00</b></div>
-          <div class="sit-pay">Pedro → Arthur · R$ 100,00<span>Copiar Pix</span></div>
+          <div class="sit-row"><div>Mercado<small>pago por Arthur</small></div><b>R$&nbsp;420,00</b></div><div class="sit-row"><div>Gasolina<small>pago por Alexandre</small></div><b>R$&nbsp;210,00</b></div><div class="sit-row"><div>Pedágio<small>pago por Isis</small></div><b>R$&nbsp;70,00</b></div>
+          <div class="sit-sum"><span>Cada um fica com</span><b>R$&nbsp;100,00</b></div>
+          <div class="sit-pay">Pedro → Arthur · R$&nbsp;100,00<span>Copiar Pix</span></div>
         </div>
     </div>
   </div>
@@ -591,9 +596,9 @@
       </div>
       <div class="sit-card fade up" data-fade>
           <div class="sit-card-head"><div class="mock-tile">🏠</div><div><div class="mock-card-name">Apê 302</div><div class="mock-card-sub">3 membros</div></div></div>
-          <div class="sit-row"><div>Aluguel<small>pago por Pedro · todo mês</small></div><b>R$ 1.800,00</b></div><div class="sit-row"><div>Luz<small>pago por Pedro · todo mês</small></div><b>R$ 180,00</b></div><div class="sit-row"><div>Internet<small>pago por Pedro · todo mês</small></div><b>R$ 120,00</b></div>
-          <div class="sit-sum"><span>Cada um fica com</span><b>R$ 700,00</b></div>
-          <div class="sit-pay">Fabi → Pedro · R$ 700,00<span>Copiar Pix</span></div>
+          <div class="sit-row"><div>Aluguel<small>pago por Pedro · todo mês</small></div><b>R$&nbsp;1.800,00</b></div><div class="sit-row"><div>Luz<small>pago por Pedro · todo mês</small></div><b>R$&nbsp;180,00</b></div><div class="sit-row"><div>Internet<small>pago por Pedro · todo mês</small></div><b>R$&nbsp;120,00</b></div>
+          <div class="sit-sum"><span>Cada um fica com</span><b>R$&nbsp;700,00</b></div>
+          <div class="sit-pay">Fabi → Pedro · R$&nbsp;700,00<span>Copiar Pix</span></div>
         </div>
     </div>
   </div>
@@ -606,9 +611,9 @@
       </div>
       <div class="sit-card fade up" data-fade>
           <div class="sit-card-head"><div class="mock-tile">🍖</div><div><div class="mock-card-name">Churrasco do Alexandre</div><div class="mock-card-sub">5 membros</div></div></div>
-          <div class="sit-row"><div>Carne e carvão<small>dividido igual · 5 pessoas</small></div><b>R$ 310,00</b></div><div class="sit-row"><div>Cerveja<small>só quem bebeu · 3 pessoas</small></div><b>R$ 90,00</b></div><div class="sit-row"><div>Por pessoa<small>sem álcool · com cerveja</small></div><b>R$ 62 · R$ 92</b></div>
-          <div class="sit-sum"><span>Total do churrasco</span><b>R$ 400,00</b></div>
-          <div class="sit-pay">Fabi → Alexandre · R$ 62,00<span>Copiar Pix</span></div>
+          <div class="sit-row"><div>Carne e carvão<small>dividido igual · 5 pessoas</small></div><b>R$&nbsp;310,00</b></div><div class="sit-row"><div>Cerveja<small>só quem bebeu · 3 pessoas</small></div><b>R$&nbsp;90,00</b></div><div class="sit-row"><div>Por pessoa<small>sem álcool · com cerveja</small></div><b>R$&nbsp;62 · R$&nbsp;92</b></div>
+          <div class="sit-sum"><span>Total do churrasco</span><b>R$&nbsp;400,00</b></div>
+          <div class="sit-pay">Fabi → Alexandre · R$&nbsp;62,00<span>Copiar Pix</span></div>
         </div>
     </div>
   </div>
@@ -621,9 +626,9 @@
       </div>
       <div class="sit-card fade up" data-fade>
           <div class="sit-card-head"><div class="mock-tile">💞</div><div><div class="mock-card-name">Casa e mercado</div><div class="mock-card-sub">2 membros</div></div></div>
-          <div class="sit-row"><div>Mercado<small>pago por Isis · 40%</small></div><b>R$ 380,00</b></div><div class="sit-row"><div>Jantar<small>pago por Pedro · 60%</small></div><b>R$ 220,00</b></div><div class="sit-row"><div>Total do mês<small>Pedro 60% · Isis 40%</small></div><b>R$ 600,00</b></div>
-          <div class="sit-sum"><span>Pedro deve a Isis</span><b>R$ 140,00</b></div>
-          <div class="sit-pay">Pedro → Isis · R$ 140,00<span>Copiar Pix</span></div>
+          <div class="sit-row"><div>Mercado<small>pago por Isis · 40%</small></div><b>R$&nbsp;380,00</b></div><div class="sit-row"><div>Jantar<small>pago por Pedro · 60%</small></div><b>R$&nbsp;220,00</b></div><div class="sit-row"><div>Total do mês<small>Pedro 60% · Isis 40%</small></div><b>R$&nbsp;600,00</b></div>
+          <div class="sit-sum"><span>Pedro deve a Isis</span><b>R$&nbsp;140,00</b></div>
+          <div class="sit-pay">Pedro → Isis · R$&nbsp;140,00<span>Copiar Pix</span></div>
         </div>
     </div>
   </div>
