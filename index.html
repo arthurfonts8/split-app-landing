@@ -395,6 +395,10 @@
        body passa a ficar azul-escuro perto do fim da página (ver o script
        "Fim da página no iPhone"). */
     #topo, #situations, #features { background: var(--bg); }
+    /* O topo colorido (#hero) já tem o próprio respiro embaixo; a margem
+       padrão da seção sobrava como uma faixa branca entre ele e a barra de
+       selos, que parecia descentralizada. */
+    #topo { padding-bottom: 0 !important; }
     /* Faixa fixa na borda de baixo, só quando a página chegou ao fim (fica
        por cima do rodapé, da mesma cor, abaixo do texto dele). O Safari do
        iOS 26 pinta a área embaixo da barra flutuante com a cor de elementos
