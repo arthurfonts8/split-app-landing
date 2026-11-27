@@ -378,6 +378,16 @@
 
     /* ── FOOTER ── */
     footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; }
+    /* Seções que antes herdavam o branco do body: fundo próprio, porque o
+       body passa a ficar azul-escuro perto do fim da página (ver o script
+       "Fim da página no iPhone"). */
+    #topo, #situations, #features { background: var(--bg); }
+    /* Faixa fixa na borda de baixo, só quando a página chegou ao fim (fica
+       por cima do rodapé, da mesma cor, abaixo do texto dele). O Safari do
+       iOS 26 pinta a área embaixo da barra flutuante com a cor de elementos
+       fixos colados na borda; sem ela, pintava de branco. */
+    #fim-tint { position: fixed; left: 0; right: 0; bottom: 0; height: 30px; background: #0f172a; pointer-events: none; z-index: 5; display: none; }
+    #fim-tint.on { display: block; }
     .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .footer-logo { font-family: var(--font-brand); font-size: 18px; font-weight: 700; color: #fff; }
     .footer-links { display: flex; gap: 24px; font-size: 13px; }
@@ -1090,21 +1100,32 @@
     renderList(); renderResult();
   })();
 </script>
+<div id="fim-tint" aria-hidden="true"></div>
 <script>
-  // "Elástico" do Safari no iPhone: ao puxar além do começo ou do fim da
-  // página, aparece a cor de fundo do documento (não a do conteúdo). Na
-  // metade de baixo ela fica azul-escuro, igual ao rodapé; na de cima,
-  // branca, igual ao topo. O conteúdo não muda: o body continua branco.
+  // Fim da página no iPhone. Ao chegar no fim (ou puxar além dele), o Safari
+  // mostrava branco embaixo do rodapé azul-escuro: no iOS 26 ele pinta a
+  // área sob a barra flutuante com a cor do body ou de um elemento fixo na
+  // borda de baixo. Na metade de baixo da página, html e body ficam da cor
+  // do rodapé (as seções têm fundo próprio, o conteúdo não muda) e, no fim,
+  // liga uma faixa fixa da mesma cor por cima do rodapé.
   (function () {
     var root = document.documentElement;
-    var light = getComputedStyle(document.body).backgroundColor;
+    var body = document.body;
+    var footer = document.querySelector('footer');
+    var tint = document.getElementById('fim-tint');
+    var light = getComputedStyle(body).backgroundColor;
     var dark = '#0f172a';
     var ticking = false;
     function update() {
       ticking = false;
       var pastHalf = window.scrollY + window.innerHeight / 2 > root.scrollHeight / 2;
       var color = pastHalf ? dark : light;
-      if (root.style.backgroundColor !== color) root.style.backgroundColor = color;
+      if (root.style.backgroundColor !== color) {
+        root.style.backgroundColor = color;
+        body.style.backgroundColor = color;
+      }
+      var atEnd = footer && footer.getBoundingClientRect().bottom <= window.innerHeight + 2;
+      tint.classList.toggle('on', !!atEnd);
     }
     window.addEventListener('scroll', function () {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
