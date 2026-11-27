@@ -377,11 +377,7 @@
     .cta-note { font-size: 13px; opacity: 0.7; margin-top: 16px; }
 
     /* ── FOOTER ── */
-    /* A sombra (do mesmo azul-escuro) continua o rodapé pra baixo: no iPhone,
-       ao puxar além do fim da página, o "elástico" do Safari mostrava o
-       fundo branco embaixo do rodapé. Sombra não aumenta a página nem cria
-       rolagem, só pinta a área que aparece no elástico. */
-    footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; box-shadow: 0 100vh 0 100vh #0f172a; }
+    footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; }
     .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .footer-logo { font-family: var(--font-brand); font-size: 18px; font-weight: 700; color: #fff; }
     .footer-links { display: flex; gap: 24px; font-size: 13px; }
@@ -616,15 +612,15 @@
   <div class="sit sit-churrasco">
     <div class="sit-inner">
       <div class="sit-copy fade up" data-fade>
-        <span class="sit-tag">Churrasco e rolê</span>
-        <h3>Quem bebeu paga a cerveja. Quem não bebeu, não.</h3>
+        <span class="sit-tag">Churrasco e rolé</span>
+        <h3>Quem bebeu paga a cerveja. Quem não bebeu, não paga.</h3>
         <p>Divida igual, por porcentagem ou por item. Cada despesa do jeito que o grupo combinou, sem discussão na hora de pagar.</p>
       </div>
       <div class="sit-card fade up" data-fade>
           <div class="sit-card-head"><div class="mock-tile">🍖</div><div><div class="mock-card-name">Churrasco do Alexandre</div><div class="mock-card-sub">5 membros</div></div></div>
           <div class="sit-row"><div>Carne e carvão<small>dividido igual · 5 pessoas</small></div><b>R$&nbsp;310,00</b></div><div class="sit-row"><div>Cerveja<small>só quem bebeu · 3 pessoas</small></div><b>R$&nbsp;90,00</b></div><div class="sit-row"><div>Por pessoa<small>sem álcool · com cerveja</small></div><b>R$&nbsp;62 · R$&nbsp;92</b></div>
           <div class="sit-sum"><span>Total do churrasco</span><b>R$&nbsp;400,00</b></div>
-          <div class="sit-pay">Fabi → Alexandre · R$&nbsp;62,00<span>Copiar Pix</span></div>
+          <div class="sit-pay">Arthur → Pedro · R$&nbsp;62,00<span>Copiar Pix</span></div>
         </div>
     </div>
   </div>
@@ -633,13 +629,13 @@
       <div class="sit-copy fade up" data-fade>
         <span class="sit-tag">Casal</span>
         <h3>Proporcional à renda, sem planilha escondida.</h3>
-        <p>Nem todo casal divide meio a meio. Defina a porcentagem de cada um e o saldo do mês fecha certo, sem climão.</p>
+        <p>Nem todo casal divide meio a meio. Defina a porcentagem de cada um e a conta do mês fecha certo.</p>
       </div>
       <div class="sit-card fade up" data-fade>
-          <div class="sit-card-head"><div class="mock-tile">💞</div><div><div class="mock-card-name">Casa e mercado</div><div class="mock-card-sub">2 membros</div></div></div>
-          <div class="sit-row"><div>Mercado<small>pago por Isis · 40%</small></div><b>R$&nbsp;380,00</b></div><div class="sit-row"><div>Jantar<small>pago por Pedro · 60%</small></div><b>R$&nbsp;220,00</b></div><div class="sit-row"><div>Total do mês<small>Pedro 60% · Isis 40%</small></div><b>R$&nbsp;600,00</b></div>
-          <div class="sit-sum"><span>Pedro deve a Isis</span><b>R$&nbsp;140,00</b></div>
-          <div class="sit-pay">Pedro → Isis · R$&nbsp;140,00<span>Copiar Pix</span></div>
+          <div class="sit-card-head"><div class="mock-tile">🏠</div><div><div class="mock-card-name">Casa e mercado</div><div class="mock-card-sub">2 membros</div></div></div>
+          <div class="sit-row"><div>Mercado<small>pago por David · 40%</small></div><b>R$&nbsp;380,00</b></div><div class="sit-row"><div>Jantar<small>pago por Isis · 60%</small></div><b>R$&nbsp;220,00</b></div><div class="sit-row"><div>Total do mês<small>Isis 60% · David 40%</small></div><b>R$&nbsp;600,00</b></div>
+          <div class="sit-sum"><span>Isis deve a David</span><b>R$&nbsp;140,00</b></div>
+          <div class="sit-pay">Isis → David · R$&nbsp;140,00<span>Copiar Pix</span></div>
         </div>
     </div>
   </div>
@@ -1092,6 +1088,29 @@
     document.getElementById('dmReset').addEventListener('click', function () { state = initial(); renderList(); renderResult(); });
 
     renderList(); renderResult();
+  })();
+</script>
+<script>
+  // "Elástico" do Safari no iPhone: ao puxar além do começo ou do fim da
+  // página, aparece a cor de fundo do documento (não a do conteúdo). Na
+  // metade de baixo ela fica azul-escuro, igual ao rodapé; na de cima,
+  // branca, igual ao topo. O conteúdo não muda: o body continua branco.
+  (function () {
+    var root = document.documentElement;
+    var light = getComputedStyle(document.body).backgroundColor;
+    var dark = '#0f172a';
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var pastHalf = window.scrollY + window.innerHeight / 2 > root.scrollHeight / 2;
+      var color = pastHalf ? dark : light;
+      if (root.style.backgroundColor !== color) root.style.backgroundColor = color;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
 </script>
 </body>
