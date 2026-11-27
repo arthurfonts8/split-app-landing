@@ -386,6 +386,13 @@
 
     @media (max-width: 768px) {
       section { padding: 64px 20px; }
+      /* No celular o topo usava a margem negativa do desktop (24px) com o
+         recuo de 20px das seções: sobravam 4px de cada lado. */
+      #hero { margin-left: -20px !important; margin-right: -20px !important; padding-left: 20px !important; padding-right: 20px !important; }
+      /* Cartões que entravam deslizando de lado ficavam 32px fora da tela
+         antes de aparecer e criavam a faixa branca ao arrastar pro lado:
+         no celular eles sobem, como o resto. */
+      .fade.left:not(.visible), .fade.right:not(.visible) { transform: translateY(24px); }
       .hero-inner { flex-direction: column; text-align: center; }
       .hero-text p { margin-left: auto; margin-right: auto; }
       .hero-mockup-col { justify-content: center; padding-right: 0; }
