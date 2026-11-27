@@ -377,7 +377,11 @@
     .cta-note { font-size: 13px; opacity: 0.7; margin-top: 16px; }
 
     /* ── FOOTER ── */
-    footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; }
+    /* A sombra (do mesmo azul-escuro) continua o rodapé pra baixo: no iPhone,
+       ao puxar além do fim da página, o "elástico" do Safari mostrava o
+       fundo branco embaixo do rodapé. Sombra não aumenta a página nem cria
+       rolagem, só pinta a área que aparece no elástico. */
+    footer { background: #0f172a; color: #94a3b8; padding: 36px 24px; box-shadow: 0 100vh 0 100vh #0f172a; }
     .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .footer-logo { font-family: var(--font-brand); font-size: 18px; font-weight: 700; color: #fff; }
     .footer-links { display: flex; gap: 24px; font-size: 13px; }
