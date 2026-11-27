@@ -25,8 +25,19 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
+    @font-face {
+      /* Fonte da marca, só no nome "Splity". Vai junto com o app/site (não
+         depende do Google Fonts): sem rede, com conexão lenta ou bloqueador de
+         conteúdo, o nome não cai mais na fonte padrão. Licença: SpaceGrotesk-OFL.txt. */
+      font-family: 'Space Grotesk';
+      font-style: normal;
+      font-weight: 300 700;
+      font-display: block;
+      src: url('/fonts/space-grotesk.woff2') format('woff2');
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
